@@ -68,3 +68,5 @@ gem 'psych', '~> 3.1'
 
 # 環境変数管理
 gem 'dotenv-rails'
+
+gem "net-smtp", require: false

@@ -69,6 +69,7 @@ gem 'psych', '~> 3.1'
 # 環境変数管理
 gem 'dotenv-rails'
 
+# メール系 ※Herokuへdeploy時に無いとエラーになった
 gem "net-smtp", require: false
 gem "net-pop", require: false
 gem "net-imap", require: false

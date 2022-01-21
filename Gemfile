@@ -71,3 +71,4 @@ gem 'dotenv-rails'
 
 gem "net-smtp", require: false
 gem "net-pop", require: false
+gem "net-imap", require: false

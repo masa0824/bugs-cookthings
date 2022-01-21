@@ -70,3 +70,4 @@ gem 'psych', '~> 3.1'
 gem 'dotenv-rails'
 
 gem "net-smtp", require: false
+gem "net-pop", require: false

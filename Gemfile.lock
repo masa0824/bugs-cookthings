@@ -110,6 +110,10 @@ GEM
     mini_portile2 (2.7.1)
     minitest (5.15.0)
     msgpack (1.4.3)
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
     net-protocol (0.1.2)
       io-wait
       timeout
@@ -239,6 +243,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mini_portile2 (~> 2.7, >= 2.7.1)
+  net-pop
   net-smtp
   pg (>= 0.18, < 2.0)
   psych (~> 3.1)

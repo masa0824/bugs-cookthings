@@ -65,3 +65,6 @@ gem 'rails-i18n' #日本語化
 gem 'mini_portile2', '~> 2.7', '>= 2.7.1'
 
 gem 'psych', '~> 3.1'
+
+# 環境変数管理
+gem 'dotenv-rails'

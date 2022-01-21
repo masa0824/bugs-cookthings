@@ -23,10 +23,10 @@ default: &default
 
 development:
   <<: *default
-  database: cookthings_development
-  username: rails_user
-  password:
-  host: localhost
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -78,8 +78,8 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+#
+#production:
+#  <<: *default

@@ -13,4 +13,10 @@ class User < ApplicationRecord
 
     #validates :password,
     #    presence: true
+
+    validates :last_name,
+        length: { maximum: MaxLength1 }
+
+    validates :first_name,
+        length: { maximum: MaxLength1 }
 end

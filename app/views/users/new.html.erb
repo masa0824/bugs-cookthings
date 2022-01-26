@@ -12,10 +12,16 @@
     <% end %>
     <%= form_for(@user) do |f| %>
       <div class="input-form">
-        <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field' %>
-        <%= f.password_field :password, :placeholder => 'パスワード', :class => 'input-field' %>
+        <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255 %>
+        <%= f.password_field :password, :placeholder => 'パスワード', :class => 'input-field', :maxlength => 255 %>
+        <p class="link-p">※氏名はアカウント作成後に登録可能です</p>
+        <%= f.text_field :last_name, :placeholder => '氏名(姓)', :class => 'input-field', :maxlength => 255 %>
+        <%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
 
         <%= f.submit "登録", :class => 'btn create-btn' %>
+
+        <p class="link-p">アカウントをお持ちの方はこちらから</p>
+        <%= link_to "ログイン", login_path, :class => 'link' %>
       </div>
     <% end %>
   </div>

@@ -1,13 +1,22 @@
+<% if request.post? %>POST<% end %>
 <div id="sessions">
   <div class="contents-wrapp">
     <%= form_for(:session, url: login_path) do |f| %>
       <div class="input-form">
+        <% if flash[:success] %>
+          <%= flash.now[:success] %>
+        <% end %>
+        <% if flash.now[:notice] %>
+          <%= flash.now[:notice] %>
+          <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', value: params[:session][:email] %>
+        <% else %>
           <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field' %>
-          <%= f.password_field :password, :placeholder => 'パスワード', :class => 'input-field' %>
-          <%= f.submit "ログイン", :class => 'btn login-btn' %>
+        <% end %>
+        <%= f.password_field :password, :placeholder => 'パスワード', :class => 'input-field' %>
+        <%= f.submit "ログイン", :class => 'btn login-btn' %>
 
-          <p class="link-p">アカウントをお持ちでない場合はこちらから</p>
-          <%= link_to "新規登録", new_user_path, :class => 'link' %>
+        <p class="link-p">アカウントをお持ちでない場合はこちらから</p>
+        <%= link_to "新規登録", new_user_path, :class => 'link' %>
       </div>
     <% end %>
   </div>

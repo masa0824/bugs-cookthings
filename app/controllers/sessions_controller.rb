@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to recipes_url
     else
+      flash.now[:notice] = 'メールアドレスもしくはパスワードが違います'
       render 'new'
     end
   end

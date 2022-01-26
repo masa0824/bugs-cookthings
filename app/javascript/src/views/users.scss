@@ -28,4 +28,9 @@
         color: #666;
         margin:0;
     }
+
+    .field_with_errors > input{
+        border-color: red !important;
+        margin-bottom: 2em;
+    }
 }

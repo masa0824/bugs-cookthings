@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, {only: [:edit, :update]}
+  before_action :logged_in_user_deny, {only: [:new, :create]}
 
   def new
       @user = User.new

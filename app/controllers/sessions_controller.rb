@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :logged_in_user_deny, {only: [:new]}
+
   def new
   end
 

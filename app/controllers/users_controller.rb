@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   # 開発テスト用
   def test
     p 'TESTTESTTEST'
-
+    SystemMailer.testmail.deliver_now
   end
 end
 

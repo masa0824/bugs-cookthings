@@ -37,6 +37,12 @@ class UsersController < ApplicationController
       render("users/edit")
     end
   end
+
+  # 開発テスト用
+  def test
+    p 'TESTTESTTEST'
+
+  end
 end
 
 private

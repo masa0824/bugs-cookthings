@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   get '/recipes/day_catalog/:date_param', to: 'recipes#day_catalog', as: 'day_catalog_recipe'
   post '/recipes/catalog/copy/:id', to: 'recipes#copy', as: 'copy_recipe'
   resources :recipes
+
+  # テスト
+  get '/user/test', to: 'users#test'
 end

@@ -1,1 +1,28 @@
 <h1>ユーザ編集画面</h1>
+
+<ul>
+<% @user.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+</ul>
+
+<% if flash[:success] %>
+<%= flash.now[:success] %>
+<% end %>
+<% if flash.now[:danger] %>
+<%= flash.now[:danger] %>
+<% end %>
+
+<div id="users">
+  <div class="contents-wrapp">
+    <%= form_for(@user, url: "/users/#{@user.id}") do |f| %>
+      <div class="input-form">
+        メールアドレス：<%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255 %>
+        氏名(姓)：<%= f.text_field :last_name, :placeholder => '氏名(姓)', :class => 'input-field', :maxlength => 255 %>
+        氏名(名)：<%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
+
+        <%= f.submit "変更", :class => 'btn create-btn' %>
+      </div>
+    <% end %>
+  </div>
+</div>

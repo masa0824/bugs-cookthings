@@ -1,6 +1,7 @@
 <% if logged_in? %>
   <header class="header">
     <div class="header-inner">
+      <%= link_to "ユーザー情報", edit_user_path(session[:user_id]), class: 'header-button home-button' %>
       <div class="logo">
         <%= link_to "Cookthings", recipes_path, class: 'header-button home-button' %>
       </div>

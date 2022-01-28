@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   # ユーザ
-  resources :users
+  resource :users
   # レシピ
   get '/recipes/search', to: 'recipes#search'
   post '/recipes/search', to: 'recipes#search'

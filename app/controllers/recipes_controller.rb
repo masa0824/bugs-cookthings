@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.includes(:food_stuffs).find(params[:id])
+    @recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
   end
 
   def search
@@ -62,17 +62,17 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.includes(:food_stuffs).find(params[:id])
+    @recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(session[:user_id])
     @recipe.destroy
     redirect_to recipes_path, notice:"削除しました"
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(session[:user_id])
     if @recipe.update(recipe_param)
       redirect_to recipes_path, notice: "編集しました"
     else
@@ -82,13 +82,13 @@ class RecipesController < ApplicationController
 
   def copy
     # レシピのクローン作成
-    recipe = Recipe.find(params[:id])
+    recipe = Recipe.find(session[:user_id])
     new_recipe = recipe.dup
     new_recipe.cook_at = params[:date_param]
     new_recipe.is_original = false
     
     # 材料のクローン作成
-    fs = FoodStuff.where(recipe_id: params[:id])
+    fs = FoodStuff.where(recipe_id: session[:user_id])
     fs.find_each do | f |
       new_fs = new_recipe.food_stuffs.build(recipe_id: new_recipe.id)
       new_fs.food_stuff = f.food_stuff

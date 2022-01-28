@@ -22,6 +22,7 @@
         氏名(名)：<%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
 
         <%= f.submit "変更", :class => 'btn create-btn' %>
+        <%= link_to "パスワードを変更する", edit_pw_path, :class => 'link' %>
       </div>
     <% end %>
   </div>

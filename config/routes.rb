@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   # ユーザ
+  get '/users/edit_pw', to: 'users#edit_pw', as: 'edit_pw'
+  patch '/users/edit_pw', to: 'users#update_edit_pw'
   resource :users
   # レシピ
   get '/recipes/search', to: 'recipes#search'

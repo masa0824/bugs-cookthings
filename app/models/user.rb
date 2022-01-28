@@ -11,15 +11,18 @@ class User < ApplicationRecord
         presence: true,
         uniqueness: true,
         length: { maximum: MaxLength1 },
-        format: { with: VALID_EMAIL_REGEX }
+        format: { with: VALID_EMAIL_REGEX },
+        on: :change_userinfo
 
     validates :password,
         presence: true,
-        on: :create
+        on: :change_password
 
     validates :last_name,
-        length: { maximum: MaxLength1 }
+        length: { maximum: MaxLength1 },
+        on: :change_userinfo
 
     validates :first_name,
-        length: { maximum: MaxLength1 }
+        length: { maximum: MaxLength1 },
+        on: :change_userinfo
 end

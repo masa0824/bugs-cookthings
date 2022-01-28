@@ -31,10 +31,10 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = '登録変更が完了しました'
-      redirect_to("/users/#{@user.id}/edit")
+      redirect_to edit_users_path
     else
       flash.now[:danger] = 'えらー'
-      render("users/edit")
+      render edit_users_path
     end
   end
 

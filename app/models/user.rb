@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-    # 参考：https://qiita.com/apukasukabian/items/62622b7ce75fe469aca3
     #has_secure_password
     has_secure_password validations: false
+
+    attr_accessor :reset_token
 
     #バリデーションの定義
     MaxLength1 = 255
@@ -14,6 +15,13 @@ class User < ApplicationRecord
         format: { with: VALID_EMAIL_REGEX },
         on: :change_userinfo
 
+    validates :email,
+        presence: true,
+        uniqueness: false,
+        length: { maximum: MaxLength1 },
+        format: { with: VALID_EMAIL_REGEX },
+        on: :reset_password
+
     validates :password,
         presence: true,
         on: :change_password
@@ -25,4 +33,43 @@ class User < ApplicationRecord
     validates :first_name,
         length: { maximum: MaxLength1 },
         on: :change_userinfo
+
+    # パスワード再設定の属性を設定する
+    def create_reset_digest
+        self.reset_token = User.new_token
+        update_attribute(:reset_digest,  User.digest(reset_token))
+        update_attribute(:reset_sent_at, Time.zone.now)
+    end
+
+    # パスワード再設定用メールを送信する
+    def send_password_reset_email
+        p 'self.reset_token'
+        p self.reset_token
+        SystemMailer.reset_password_mail(self).deliver_now
+    end
+
+    # ランダムなトークンを返す
+    def User.new_token
+        SecureRandom.urlsafe_base64
+    end
+
+    # 渡された文字列のハッシュ値を返す
+    def User.digest(string)
+        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                BCrypt::Engine.cost
+        BCrypt::Password.create(string, cost: cost)
+    end
+
+    # トークンがダイジェストと一致したらtrueを返す
+    def authenticated?(attribute, token)
+        digest = send("#{attribute}_digest")
+        return false if digest.nil?
+        BCrypt::Password.new(digest).is_password?(token)
+    end
+
+    def password_reset_expired?
+        #reset_sent_at < 2.hours.ago
+        num = ENV['MYAPP_EXPIRATION_MINUTES_RESET_PASSWORD'].to_i
+        reset_sent_at < num.minutes.ago
+    end
 end

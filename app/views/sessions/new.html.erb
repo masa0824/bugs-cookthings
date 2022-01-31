@@ -17,6 +17,9 @@
 
         <p class="link-p">アカウントをお持ちでない場合はこちらから</p>
         <%= link_to "新規登録", new_users_path, :class => 'link' %>
+
+        <p class="link-p">パスワードを忘れた方はこちらから</p>
+        <%= link_to "パスワード再発行", reset_password_path, :class => 'link' %>
       </div>
     <% end %>
   </div>

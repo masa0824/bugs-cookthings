@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, {only: [:edit, :update, :edit_pw]}
   before_action :logged_in_user_deny, {only: [:new, :create]}
+  before_action :get_user,   only: [:reset_password_edit, :reset_password_update]
+  before_action :valid_user, only: [:reset_password_edit, :reset_password_update]
+  before_action :check_expiration, only: [:reset_password_edit, :reset_password_update]
 
   def new
       @user = User.new
@@ -57,15 +60,60 @@ class UsersController < ApplicationController
     end
   end
 
+  # パスワードリセット
+  def reset_password
+    @user = User.new
+  end
+
+  def reset_password_sendmail
+    @user = User.new(user_params)
+    if @user.valid?(:reset_password)
+      reset_password = User.find_by(email: params[:user][:email])
+      reset_password.create_reset_digest
+      p reset_password.reset_token
+      reset_password.send_password_reset_email
+    else
+      render reset_password_path
+    end
+  end
+
+  # パスワードリセット
+  def reset_password_edit
+  end
+
+  # パスワードリセットによる更新
+  def reset_password_update
+  end
+
   # 開発テスト用
   def test
     p 'TESTTESTTEST'
     SystemMailer.testmail.deliver_now
   end
-end
 
-private
 
-def user_params
-  params.require(:user).permit(:email, :password, :last_name, :first_name)
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :password, :last_name, :first_name)
+  end
+
+  def get_user
+    @user = User.find_by(email: params[:email])
+  end
+
+  # 正しいユーザーかどうか確認する
+  def valid_user
+    unless (@user && @user.authenticated?(:reset, params[:token]))
+      redirect_to root_url
+    end
+  end
+
+  # トークンが期限切れかどうか確認する
+  def check_expiration
+    if @user.password_reset_expired?
+      flash[:danger] = "パスワードのリセットの有効期限が切れました。"
+      redirect_to reset_password_url
+    end
+  end
 end

@@ -11,4 +11,17 @@ class SystemMailer < ApplicationMailer
             #format.html #HTMLメールを指定
         end
     end
+
+    def reset_password_mail(user)
+        @user = user
+        mail(
+            from: 'harada.itservice@gmail.com',
+            to:   'oldtimer.masa@gmail.com',
+            subject: '＜BugsCooking＞パスワード再発行'
+        ) do |format|
+            format.text #テキストメールを指定
+            #format.html #HTMLメールを指定
+        end
+    end
+
 end

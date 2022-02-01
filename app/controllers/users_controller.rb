@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     if @user.valid?(:reset_password)
       reset_password = User.find_by(email: params[:user][:email])
       reset_password.create_reset_digest
-      p reset_password.reset_token
+      reset_password.reset_token
       reset_password.send_password_reset_email
     else
       render reset_password_path
@@ -83,6 +83,16 @@ class UsersController < ApplicationController
 
   # パスワードリセットによる更新
   def reset_password_update
+    # 更新対象
+    @user.password = user_params[:password]
+
+    if @user.save(context: :change_password)
+      flash[:success] = '変更完了しました'
+    else
+      flash[:danger] = 'えらー'
+      #render reset_password_edit_path(params[:token], email: @user.email)
+      redirect_to reset_password_edit_url(params[:token], email: @user.email)
+    end
   end
 
   # 開発テスト用
@@ -90,7 +100,6 @@ class UsersController < ApplicationController
     p 'TESTTESTTEST'
     SystemMailer.testmail.deliver_now
   end
-
 
   private
 
@@ -104,6 +113,7 @@ class UsersController < ApplicationController
 
   # 正しいユーザーかどうか確認する
   def valid_user
+  @user.authenticated?(:reset, params[:token])
     unless (@user && @user.authenticated?(:reset, params[:token]))
       redirect_to root_url
     end
@@ -111,6 +121,7 @@ class UsersController < ApplicationController
 
   # トークンが期限切れかどうか確認する
   def check_expiration
+    @user.password_reset_expired?
     if @user.password_reset_expired?
       flash[:danger] = "パスワードのリセットの有効期限が切れました。"
       redirect_to reset_password_url

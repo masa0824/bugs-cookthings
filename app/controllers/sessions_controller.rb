@@ -7,8 +7,13 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_to recipes_url
+      if user.activated?
+        log_in user
+        redirect_to recipes_url
+      else
+        flash.now[:notice] = 'アカウントが本登録されてません'
+        render 'new'
+      end
     else
       flash.now[:notice] = 'メールアドレスもしくはパスワードが違います'
       render 'new'

@@ -12,16 +12,29 @@ class SystemMailer < ApplicationMailer
         end
     end
 
-    def reset_password_mail(user)
+    # アカウントの本登録案内
+    def account_activation_mail(user)
         @user = user
         mail(
-            from: 'harada.itservice@gmail.com',
-            to:   'oldtimer.masa@gmail.com',
-            subject: '＜BugsCooking＞パスワード再発行'
+            from: ENV['MYAPP_MAIL_AUTH_USER'],
+            to:   @user.email,
+            subject: '＜BugsCooking＞アカウント登録案内'
         ) do |format|
             format.text #テキストメールを指定
             #format.html #HTMLメールを指定
         end
     end
 
+    # パスワードリマインダー案内
+    def reset_password_mail(user)
+        @user = user
+        mail(
+            from: ENV['MYAPP_MAIL_AUTH_USER'],
+            to:   @user.email,
+            subject: '＜BugsCooking＞パスワード再発行'
+        ) do |format|
+            format.text #テキストメールを指定
+            #format.html #HTMLメールを指定
+        end
+    end
 end

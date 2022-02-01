@@ -12,7 +12,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = '登録が完了しました'
+      flash[:success] = '仮登録が完了しました。送られたメールにて本登録ください。'
+      # 本登録アクティベーション案内
+      activation = User.find_by(email: @user.email)
+      activation.create_activation_digest
       redirect_to root_url
     else
       flash.now[:danger] = 'えらー'
@@ -59,6 +62,32 @@ class UsersController < ApplicationController
       render edit_pw_path
     end
   end
+
+
+
+  
+  # アカウント有効化
+  def account_activation_edit
+    #@user = User.new
+    user = User.find_by(email: params[:email])
+    if user && !user.activated? && user.authenticated?(:activation, params[:token])
+      user.update_attribute(:activated,    true)
+      user.update_attribute(:activated_at, Time.zone.now)
+      #log_in user
+      flash[:success] = "Account activated!"
+     #redirect_to user
+    else
+      flash[:danger] = "Invalid activation link"
+      redirect_to root_url
+    end
+  end
+
+
+
+
+
+
+
 
   # パスワードリセット
   def reset_password
@@ -113,7 +142,7 @@ class UsersController < ApplicationController
 
   # 正しいユーザーかどうか確認する
   def valid_user
-  @user.authenticated?(:reset, params[:token])
+    @user.authenticated?(:reset, params[:token])
     unless (@user && @user.authenticated?(:reset, params[:token]))
       redirect_to root_url
     end

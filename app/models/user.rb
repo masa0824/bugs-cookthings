@@ -2,7 +2,7 @@ class User < ApplicationRecord
     #has_secure_password
     has_secure_password validations: false
 
-    attr_accessor :reset_token
+    attr_accessor :activation_token, :reset_token
 
     #バリデーションの定義
     MaxLength1 = 255
@@ -34,6 +34,14 @@ class User < ApplicationRecord
         length: { maximum: MaxLength1 },
         on: :change_userinfo
 
+    # アカウント登録時のアクティベーション
+    def create_activation_digest
+        self.activation_token = User.new_token
+        update_attribute(:activation_digest,  User.digest(activation_token))
+        update_attribute(:activated_at, Time.zone.now)
+        SystemMailer.account_activation_mail(self).deliver_now
+    end
+    
     # パスワード再設定の属性を設定する
     def create_reset_digest
         self.reset_token = User.new_token
@@ -43,8 +51,7 @@ class User < ApplicationRecord
 
     # パスワード再設定用メールを送信する
     def send_password_reset_email
-        p 'self.reset_token'
-        p self.reset_token
+        self.reset_token
         SystemMailer.reset_password_mail(self).deliver_now
     end
 

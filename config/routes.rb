@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # ユーザ
   get '/users/edit_pw', to: 'users#edit_pw', as: 'edit_pw'
   patch '/users/edit_pw', to: 'users#update_edit_pw'
+  # アカウント登録
+  get '/users/account_activation/:token/edit', to: 'users#account_activation_edit', as: 'account_activation_edit'
   # パスワードリマインダー
   get '/users/reset_password', to: 'users#reset_password', as: 'reset_password'
   post '/users/reset_password', to: 'users#reset_password_sendmail'

@@ -74,6 +74,7 @@ class User < ApplicationRecord
         BCrypt::Password.new(digest).is_password?(token)
     end
 
+    # パスワード再発行の有効期限
     def password_reset_expired?
         #reset_sent_at < 2.hours.ago
         num = ENV['MYAPP_EXPIRATION_MINUTES_RESET_PASSWORD'].to_i

@@ -3,8 +3,8 @@ class SystemMailer < ApplicationMailer
     def testmail
         @greeting = "Hello"
         mail(
-            from: 'harada.itservice@gmail.com',
-            to:   'oldtimer.masa@gmail.com',
+            from: ENV['MYAPP_MAIL_AUTH_USER'],
+            to:   ENV['MYAPP_MAIL_AUTH_USER'],
             subject: '＜テストメール＞BugsCooking'
         ) do |format|
             format.text #テキストメールを指定

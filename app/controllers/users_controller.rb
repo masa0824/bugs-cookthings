@@ -63,9 +63,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
-  
   # アカウント有効化
   def account_activation_edit
     #@user = User.new
@@ -81,14 +78,7 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
-
-
-
-
-
-
-
-
+  
   # パスワードリセット
   def reset_password
     @user = User.new

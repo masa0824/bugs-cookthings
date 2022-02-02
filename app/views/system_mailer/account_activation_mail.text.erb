@@ -1,8 +1,15 @@
-<h1>Sample App</h1>
+【BugsCookthingsの本登録へ】
 
-<p>
-Welcome to the Sample App! Click on the link below to activate your account:
-</p>
+※このメールは送信専用となっております。
+ご返信いただいてもお答えできませんのでご了承ください。
 
-<%= link_to "Activate", account_activation_edit_url(@user.activation_token,
-                                                    email: @user.email) %>
+※このメールにお心当たりがない場合は、本メールを削除してください。
+
+
+BugsCookthingsにご登録いただきありがとうございました。
+以下URLをクリックする事で、本登録が完了します。
+
+==================================
+本登録認証URL
+<%= account_activation_edit_url(@user.activation_token, email: @user.email) %>
+==================================

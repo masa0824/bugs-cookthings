@@ -114,6 +114,19 @@ class UsersController < ApplicationController
     end
   end
 
+  # アカウント削除ページ
+  def account_delete
+    @user = User.find_by(id: session[:user_id])
+  end
+
+  # アカウント削除
+  def destroy
+    @user = User.find_by(id: session[:user_id])
+    log_out
+    @user.destroy
+    redirect_to root_url
+  end
+  
   # 開発テスト用
   def test
     p 'TESTTESTTEST'

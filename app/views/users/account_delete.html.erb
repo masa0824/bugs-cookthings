@@ -1,0 +1,25 @@
+<h1>アカウントを削除</h1>
+
+<ul>
+<% @user.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+</ul>
+
+<% if flash[:success] %>
+<%= flash.now[:success] %>
+<% end %>
+<% if flash.now[:danger] %>
+<%= flash.now[:danger] %>
+<% end %>
+
+<div id="users">
+  <div class="contents-wrapp">
+    <%= form_for(@user, url: users_path, method: 'delete') do |f| %>
+      <div class="input-form">
+        
+        <%= f.submit "アカウント削除をする", :class => 'btn create-btn', :id => 'acount_delete' %>
+      </div>
+    <% end %>
+  </div>
+</div>

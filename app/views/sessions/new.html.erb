@@ -8,10 +8,14 @@
         <% end %>
         <% if flash.now[:notice] %>
           <%= flash.now[:notice] %>
-          <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', value: params[:session][:email] %>
+        <% end %>
+
+        <% if !params.dig(:session,:email).nil? %>
+          <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', value: params.dig(:session,:email) %>
         <% else %>
           <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field' %>
         <% end %>
+
         <%= f.password_field :password, :placeholder => 'パスワード', :class => 'input-field' %>
         <%= f.submit "ログイン", :class => 'btn login-btn' %>
 

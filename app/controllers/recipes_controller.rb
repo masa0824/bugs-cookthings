@@ -22,7 +22,8 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
+    #@recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
+    @recipe = Recipe.includes(:food_stuffs).find_by(id: params[:id], user_id: session[:user_id])
   end
 
   def search
@@ -62,7 +63,8 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
+    #@recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
+    @recipe = Recipe.includes(:food_stuffs).find_by(id: params[:id], user_id: session[:user_id])
   end
 
   def destroy
@@ -72,7 +74,8 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find(session[:user_id])
+    #@recipe = Recipe.find(session[:user_id])
+    @recipe = Recipe.find_by(id: params[:id], user_id: session[:user_id])
     if @recipe.update(recipe_param)
       redirect_to recipes_path, notice: "編集しました"
     else

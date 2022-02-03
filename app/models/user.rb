@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    #has_secure_password
+    has_many :recipes, foreign_key: :user_id, dependent: :destroy
     has_secure_password validations: false
 
     attr_accessor :activation_token, :reset_token

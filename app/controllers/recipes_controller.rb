@@ -115,6 +115,7 @@ class RecipesController < ApplicationController
         :cook_at, 
         :recipe_name,
         :category,
+        :recipe_image,
         food_stuffs_attributes:[
             :id,
             :food_stuff,

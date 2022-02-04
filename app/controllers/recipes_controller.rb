@@ -11,7 +11,8 @@ class RecipesController < ApplicationController
   end
 
   def catalog
-    @recipes = Recipe.all.where(is_original: true, user_id: current_user.id)
+    #@recipes = Recipe.all.where(is_original: true, user_id: current_user.id)
+    @recipes = Recipe.includes(:food_stuffs).all.where(is_original: true, user_id: current_user.id)
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
 

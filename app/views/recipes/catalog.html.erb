@@ -9,10 +9,13 @@
 
     <% @recipes.each do |r| %>
       <div class="card">
-          <%= image_tag 'no-image.png', :class => 'no-image' %>
+          <% if r.recipe_image.persisted? %>
+            <%= image_tag r.recipe_image, :class => 'recipe-image' %>
+          <% else %>
+            <%= image_tag 'no-image.png', :class => 'recipe-image' %>
+          <% end %>
           <%= button_to r.recipe_name, copy_recipe_path(r, date_param: @cook_at), :class => 'link' %>
-        
-      </div>  
+      </div>
     <% end %>
   </div>
 </div>

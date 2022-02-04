@@ -17,9 +17,15 @@
   <div class="contents-wrapp">
     <%= form_for(@user, url: users_path, method: 'delete') do |f| %>
       <div class="input-form">
-        
         <%= f.submit "アカウント削除をする", :class => 'btn create-btn', :id => 'acount_delete' %>
       </div>
     <% end %>
   </div>
 </div>
+
+<% if false %>
+<%= link_to "削除",
+users_path(@user),
+method: :delete,
+data: {confirm: '削除しますか？'} %>
+<% end %>

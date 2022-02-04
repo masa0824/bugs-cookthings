@@ -27,11 +27,12 @@ class UsersController < ApplicationController
     @user = User.find_by(id: session[:user_id])
   end
 
+  # ユーザーアカウント情報更新
   def update
     @user = User.find_by(id: session[:user_id])
     # 更新対象
     @user.id = session[:user_id]
-    @user.email = user_params[:email]
+    #@user.email = user_params[:email]
     @user.last_name = user_params[:last_name]
     @user.first_name = user_params[:first_name]
     

@@ -17,7 +17,7 @@
   <div class="contents-wrapp">
     <%= form_for(@user, url: users_path) do |f| %>
       <div class="input-form">
-        メールアドレス：<%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255 %>
+        メールアドレス：<%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255, :disabled => 'disabled' %>
         氏名(姓)：<%= f.text_field :last_name, :placeholder => '氏名(姓)', :class => 'input-field', :maxlength => 255 %>
         氏名(名)：<%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
 

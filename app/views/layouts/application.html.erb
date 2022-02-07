@@ -17,8 +17,10 @@
     <% when "recipes" %>
     <div id="recipe-bg_img"></div>
     <% end %>
-    
+
     <%= render 'layouts/header' %>
     <%= yield %>
+
+    <%= javascript_pack_tag 'humberger', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

@@ -12,6 +12,12 @@
   </head>
 
   <body>
+
+    <% case controller.controller_name %>
+    <% when "recipes" %>
+    <div id="recipe-bg_img"></div>
+    <% end %>
+    
     <%= render 'layouts/header' %>
     <%= yield %>
   </body>

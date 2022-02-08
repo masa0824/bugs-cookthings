@@ -5,7 +5,7 @@
       <% if @recipe.recipe_image.persisted? %>
         <%= image_tag @recipe.recipe_image, :class => 'recipe-image' %>
       <% else %>
-        <%= image_tag 'no-image.png', :class => 'recipe-image' %>
+        <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
       <% end %>
       <%= form_for @recipe, url:recipe_path(@recipe) do |r| %>
         <table id="recipe-table">

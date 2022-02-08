@@ -12,7 +12,7 @@
           <% if r.recipe_image.persisted? %>
             <%= image_tag r.recipe_image, :class => 'recipe-image' %>
           <% else %>
-            <%= image_tag 'no-image.png', :class => 'recipe-image' %>
+            <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
           <% end %>
           <%= button_to r.recipe_name, copy_recipe_path(r, date_param: @cook_at), :class => 'link' %>
       </div>

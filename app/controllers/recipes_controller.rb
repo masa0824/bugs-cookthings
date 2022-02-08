@@ -2,15 +2,18 @@ class RecipesController < ApplicationController
   before_action :logged_in_user
 
   def index
+    @menu_page_title = 'Cookthings'
     @recipes = Recipe.all.where(user_id: current_user.id)
   end
 
   def day_catalog
+    @menu_page_title = 'レシピ追加'
     @recipes = Recipe.all.where(user_id: current_user.id, cook_at: params[:date_param].to_date.beginning_of_day...params[:date_param].to_date.end_of_day)
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
 
   def catalog
+    @menu_page_title = 'レシピ一覧'
     #@recipes = Recipe.all.where(is_original: true, user_id: current_user.id)
     @recipes = Recipe.includes(:food_stuffs).all.where(is_original: true, user_id: current_user.id)
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today

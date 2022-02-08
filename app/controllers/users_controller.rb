@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @menu_page_title = 'ユーザー情報'
     @user = User.find_by(id: session[:user_id])
   end
 

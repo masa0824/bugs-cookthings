@@ -112,6 +112,35 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
+  # 登録レシピ表示
+  def regist_list
+    @menu_page_title = 'レシピ登録'
+    @recipeTemplates = RecipeTemplate.includes(:food_stuff_templates).all.where(user_id: current_user.id)
+    #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
+  end
+
+  # レシピ新規入力
+  def regist_new
+    @recipeTemplates = RecipeTemplate.new
+    @recipeTemplates.food_stuff_templates.build
+    #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
+  end
+  
+  # レシピ新規登録
+  def regist_create
+    @recipeTemplates = RecipeTemplate.create(regist_recipe_param)
+    #@recipe.is_original = true
+    @recipeTemplates.user_id = current_user.id
+    if @recipeTemplates.save
+      flash[:success] = "登録しました"
+      @recipeTemplates = Recipe.all.where(user_id: current_user.id)
+      redirect_to recipes_path
+    else
+      flash.now[:danger] = "なにかちがう"
+      render :new
+    end
+  end
+
   private
 
   def recipe_param
@@ -121,6 +150,22 @@ class RecipesController < ApplicationController
         :category,
         :recipe_image,
         food_stuffs_attributes:[
+            :id,
+            :food_stuff,
+            :amount,
+            :mass,
+            :_destroy
+        ]
+    )
+  end
+
+  def regist_recipe_param
+    params.require(:recipe_template).permit(
+        #:cook_at, 
+        :recipe_name,
+        :category,
+        :recipe_image,
+        food_stuff_templates_attributes:[
             :id,
             :food_stuff,
             :amount,

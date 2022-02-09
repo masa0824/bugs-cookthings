@@ -1,0 +1,25 @@
+<h1>レシピ新規登録</h1>
+<div id="recipe-new">
+  <div class="grid">
+    <div class="card">
+      <%= form_for @recipeTemplates, url: regist_new_recipes_path do |r| %>
+        <table id="recipe-table">
+          <tr>
+            <th>レシピ名</th>
+            <td><%= r.text_field :recipe_name %></td>
+          </tr>
+       
+        </table>
+          ------------材料------------
+        <table id="food-stuff-table">
+          <%= r.fields_for :food_stuff_templates do |food|%>
+            <%= render "food_stuff_template_fields", f: food %>
+          <% end %>
+        </table>
+        <div class="addBtn"><%= link_to_add_fields "追加", r, :food_stuff_templates %></div>
+        
+        <%= r.submit "完了", :class => 'btn finish-btn'%>
+      <% end %>
+    </div>
+  </div>
+</div>

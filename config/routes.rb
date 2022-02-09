@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   get '/recipes/catalog/:date_param', to: 'recipes#catalog', as: 'catalog_recipe'
   get '/recipes/day_catalog/:date_param', to: 'recipes#day_catalog', as: 'day_catalog_recipe'
   post '/recipes/catalog/copy/:id', to: 'recipes#copy', as: 'copy_recipe'
+  # テンプレートレシピの登録
+  get '/recipes/regist_list', to: 'recipes#regist_list', as: 'regist_list_recipe'
+  get '/recipes/regist_new', to: 'recipes#regist_new', as: 'regist_new_recipes'
+  post '/recipes/regist_new', to: 'recipes#regist_create'
   resources :recipes
 
   # テスト

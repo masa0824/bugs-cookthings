@@ -15,7 +15,8 @@ class RecipesController < ApplicationController
   def catalog
     @menu_page_title = 'レシピ一覧'
     #@recipes = Recipe.all.where(is_original: true, user_id: current_user.id)
-    @recipes = Recipe.includes(:food_stuffs).all.where(is_original: true, user_id: current_user.id)
+    #@recipes = Recipe.includes(:food_stuffs).all.where(is_original: true, user_id: current_user.id)
+    @recipeTemplates = RecipeTemplate.includes(:food_stuff_templates).all.where(user_id: current_user.id)
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
 
@@ -23,6 +24,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.food_stuffs.build
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
+    if params[:recipe_tpl_id]
+      @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:recipe_tpl_id], user_id: current_user.id)
+    end
   end
 
   def show
@@ -112,21 +116,21 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
-  # 登録レシピ表示
+  # テンプレートレシピ表示
   def regist_list
     @menu_page_title = 'レシピ登録'
     @recipeTemplates = RecipeTemplate.includes(:food_stuff_templates).all.where(user_id: current_user.id)
     #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
 
-  # レシピ新規入力
+  # テンプレートレシピ新規入力
   def regist_new
     @recipeTemplates = RecipeTemplate.new
     @recipeTemplates.food_stuff_templates.build
     #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
   
-  # レシピ新規登録
+  # テンプレートレシピ新規登録
   def regist_create
     @recipeTemplates = RecipeTemplate.create(regist_recipe_param)
     #@recipe.is_original = true
@@ -139,6 +143,17 @@ class RecipesController < ApplicationController
       flash.now[:danger] = "なにかちがう"
       render :new
     end
+  end
+
+  # テンプレートレシピ編集
+  def regist_edit
+    @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:id], user_id: current_user.id)
+  end
+
+  # テンプレートレシピ削除
+  def regist_destroy
+    @recipeTemplates.destroy
+    redirect_to recipes_path, notice:"削除しました"
   end
 
   private
@@ -164,7 +179,7 @@ class RecipesController < ApplicationController
         #:cook_at, 
         :recipe_name,
         :category,
-        :recipe_image,
+        :recipe_template_image,
         food_stuff_templates_attributes:[
             :id,
             :food_stuff,

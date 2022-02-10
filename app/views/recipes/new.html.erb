@@ -20,7 +20,11 @@
           
           <tr>
             <th>レシピ名</th>
-            <td><%= r.text_field :recipe_name %></td>
+            <% if @recipeTemplate %>
+              <td><%= r.text_field :recipe_name, value: @recipeTemplate.recipe_name %></td>
+            <% else %>
+              <td><%= r.text_field :recipe_name %></td>
+            <% end %>
           </tr>
 
           <tr>

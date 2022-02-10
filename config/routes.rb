@@ -26,8 +26,13 @@ Rails.application.routes.draw do
   post '/recipes/catalog/copy/:id', to: 'recipes#copy', as: 'copy_recipe'
   # テンプレートレシピの登録
   get '/recipes/regist_list', to: 'recipes#regist_list', as: 'regist_list_recipe'
-  get '/recipes/regist_new', to: 'recipes#regist_new', as: 'regist_new_recipes'
+  get '/recipes/regist_new', to: 'recipes#regist_new', as: 'regist_new_recipe'
   post '/recipes/regist_new', to: 'recipes#regist_create'
+  # テンプレートレシピ編集
+  get '/recipes/regist_edit/:id', to: 'recipes#regist_edit', as: 'regist_edit_recipe'
+  patch '/recipes/regist_edit/:id', to: 'recipes#regist_edit'
+  # テンプレートレシピ削除
+  delete '/recipes/regist_delete/:id', to: 'recipes#regist_destroy', as: 'regist_delete'
   resources :recipes
 
   # テスト

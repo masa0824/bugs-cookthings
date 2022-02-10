@@ -3,18 +3,22 @@
   <div class="grid">
   
     <div class="card">
-      <div class="add"><%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %></div>
+      <div class="add"><%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
       <%= link_to "レシピ新規追加", new_recipe_path(date_param: @cook_at), :class => 'link' %>
+      </div>
     </div>
 
-    <% @recipes.each do |r| %>
+    <% @recipeTemplates.each do |r| %>
       <div class="card">
-          <% if r.recipe_image.persisted? %>
-            <%= image_tag r.recipe_image, :class => 'recipe-image' %>
+          <% if r.recipe_template_image.persisted? %>
+            <%= image_tag r.recipe_template_image, :class => 'recipe-image' %>
           <% else %>
             <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
           <% end %>
+          【登録レシピ】<%= r.recipe_name %> <%= link_to "[追加]", new_recipe_path(date_param: @cook_at, recipe_tpl_id: r.id), :class => 'link' %>
+          <!--
           <%= button_to r.recipe_name, copy_recipe_path(r, date_param: @cook_at), :class => 'link' %>
+          -->
       </div>
     <% end %>
   </div>

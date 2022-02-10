@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   post '/recipes/regist_new', to: 'recipes#regist_create'
   # テンプレートレシピ編集
   get '/recipes/regist_edit/:id', to: 'recipes#regist_edit', as: 'regist_edit_recipe'
-  patch '/recipes/regist_edit/:id', to: 'recipes#regist_edit'
+  # テンプレートレシピ更新
+  patch '/recipes/regist_edit/:id', to: 'recipes#regist_update'
   # テンプレートレシピ削除
   delete '/recipes/regist_delete/:id', to: 'recipes#regist_destroy', as: 'regist_delete'
   resources :recipes

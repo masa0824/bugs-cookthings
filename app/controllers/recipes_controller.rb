@@ -151,6 +151,16 @@ class RecipesController < ApplicationController
     @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:id], user_id: current_user.id)
   end
 
+  # テンプレートレシピ更新
+  def regist_update
+    @recipeTemplate = RecipeTemplate.find_by(id: params[:id], user_id: current_user.id)
+    if @recipeTemplate.update(regist_recipe_param)
+      redirect_to recipes_path, notice: "編集しました"
+    else
+      render 'edit'
+    end
+  end
+
   # テンプレートレシピ削除
   def regist_destroy
     @recipeTemplate = RecipeTemplate.find_by(id: params[:id], user_id: current_user.id)

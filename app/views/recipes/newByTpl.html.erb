@@ -2,7 +2,7 @@
 <div id="recipe-new">
   <div class="grid">
     <div class="card">
-      <%= form_for @recipe do |r| %>
+      <%= form_for @recipeTemplate, url: recipe_tplnew_path, method: 'post' do |r| %>
         <table id="recipe-table">
           <tr>
             <th>調理日</th>
@@ -26,15 +26,15 @@
           <tr>
             <th>カテゴリ</th>
             <td><%= r.text_field :category %></td>
-          </tr>
+          </tr>          
         </table>
-          ------------材料------------
+        ------------材料------------
         <table id="food-stuff-table">
-          <%= r.fields_for :food_stuffs do |food|%>
-            <%= render "food_stuff_fields", f: food %>
+          <%= r.fields_for :food_stuff_templates do |food|%>
+            <%= render "food_stuff_template_fields", f: food %>
           <% end %>
         </table>
-        <div class="addBtn"><%= link_to_add_fields "追加", r, :food_stuffs %></div>
+        <div class="addBtn"><%= link_to_add_fields "追加", r, :food_stuff_templates %></div>
         
         <%= r.submit "完了", :class => 'btn finish-btn'%>
       <% end %>

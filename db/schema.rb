@@ -65,7 +65,10 @@ ActiveRecord::Schema.define(version: 2022_02_09_025207) do
 
   create_table "recipe_templates", force: :cascade do |t|
     t.string "recipe_name", limit: 255
+    t.string "category", limit: 255
+    t.datetime "cook_at"
     t.bigint "user_id"
+    t.boolean "is_original", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_recipe_templates_on_user_id"

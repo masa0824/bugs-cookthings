@@ -21,11 +21,14 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
-    @recipe.food_stuffs.build
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
-    if params[:recipe_tpl_id]
+    # テンプレートレシピを利用するかしないかで分岐
+    if !params[:recipe_tpl_id]
+      @recipe = Recipe.new
+      @recipe.food_stuffs.build
+    else
       @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:recipe_tpl_id], user_id: current_user.id)
+      render 'newByTpl.html'
     end
   end
 
@@ -56,10 +59,40 @@ class RecipesController < ApplicationController
     @recipes = Recipe.includes(:food_stuffs).where(id: recipe_ids).order(cook_at: "asc")
   end
 
+  # カレンダーレシピの登録
   def create
     @recipe = Recipe.create(recipe_param)
     @recipe.is_original = true
     @recipe.user_id = current_user.id
+
+    if @recipe.save
+      flash[:success] = "登録しました"
+      @recipes = Recipe.all.where(user_id: current_user.id)
+      redirect_to recipes_path
+    else
+      flash.now[:danger] = "なにかちがう"
+      render :new
+    end
+  end
+
+  # テンプレートレシピを使ってカレンダーレシピを登録
+  def create2
+    @recipe = Recipe.new
+    @recipeTemplate = RecipeTemplate.new(regist_recipe_param(false))
+    # @recipeモデルに値を追加
+    @recipe.recipe_name = @recipeTemplate.recipe_name
+    @recipe.category = @recipeTemplate.category
+    @recipe.cook_at = @recipeTemplate.cook_at
+    @recipe.user_id = current_user.id
+    @recipe.is_original = true
+    @recipeTemplate.food_stuff_templates.each do | fst |
+      @recipe.food_stuffs.build(
+        food_stuff: fst.food_stuff,
+        amount: fst.amount,
+        mass: fst.mass
+      )
+    end
+
     if @recipe.save
       flash[:success] = "登録しました"
       @recipes = Recipe.all.where(user_id: current_user.id)
@@ -186,9 +219,10 @@ class RecipesController < ApplicationController
     )
   end
 
-  def regist_recipe_param
-    params.require(:recipe_template).permit(
-        #:cook_at, 
+  def regist_recipe_param(need_id=true)
+    if need_id
+      params.require(:recipe_template).permit(
+        :cook_at, 
         :recipe_name,
         :category,
         :recipe_template_image,
@@ -199,6 +233,21 @@ class RecipesController < ApplicationController
             :mass,
             :_destroy
         ]
-    )
+      )
+    else
+      params.require(:recipe_template).permit(
+        :cook_at, 
+        :recipe_name,
+        :category,
+        :recipe_template_image,
+        food_stuff_templates_attributes:[
+            #:id,
+            :food_stuff,
+            :amount,
+            :mass,
+            :_destroy
+        ]
+      )
+    end
   end
 end

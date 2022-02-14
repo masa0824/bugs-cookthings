@@ -483,10 +483,9 @@
 }
 
 
-
 /*** ＜暫定＞ ***/
 /* 背景画像 */
-#recipe-bg_img{
+#recipe-bg_calendar_img{
   /*位置の設定*/
   width: 100%;
   height: 100%;
@@ -495,12 +494,30 @@
   left: 0;
 
   /*背景画像の設定*/
-  background: url("/img/sample_xd_1708851_m.png");
+  background: url("/img/bg/bg_calendar_1.png");
   /*background: image-url("/images/no-image.png");*/
   background-size: cover;
 
   /*透過の設定*/
-  opacity: 0.3;
+  opacity: 0.5;
+  z-index: -1;
+}
+/* 背景画像 */
+#recipe-bg_recipe_img{
+  /*位置の設定*/
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /*背景画像の設定*/
+  background: url("/img/bg/bg_recipe_1.png");
+  /*background: image-url("/images/no-image.png");*/
+  background-size: cover;
+
+  /*透過の設定*/
+  opacity: 0.2;
   z-index: -1;
 }
 

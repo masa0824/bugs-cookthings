@@ -15,7 +15,12 @@
 
     <% case controller.controller_name %>
     <% when "recipes" %>
-    <div id="recipe-bg_img"></div>
+      <% case controller.action_name %>
+      <% when "index" %>
+        <div id="recipe-bg_calendar_img"></div>
+      <% else %>
+        <div id="recipe-bg_recipe_img"></div>
+      <% end %>  
     <% end %>
 
     <%= render 'layouts/header' %>

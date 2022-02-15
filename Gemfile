@@ -26,7 +26,13 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing'
+
+# Cloudinary & Active Storage
+gem 'cloudinary', require: true
+#gem 'carrierwave'
+gem 'activestorage-cloudinary-service'
+gem 'active_storage_validations'
 
 gem 'bcrypt',  '3.1.12' # ログイン機能用 Add 20200905
 

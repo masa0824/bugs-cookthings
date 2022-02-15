@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   patch '/recipes/regist_edit/:id', to: 'recipes#regist_update'
   # テンプレートレシピ削除
   delete '/recipes/regist_delete/:id', to: 'recipes#regist_destroy', as: 'regist_delete'
+  # レシピ画像の削除[テンプレート・カレンダー共通]
+  delete '/recipes/:id/edit', to: 'recipes#image_destroy', as: 'image_recipe_delete'
   resources :recipes
 
   # テスト

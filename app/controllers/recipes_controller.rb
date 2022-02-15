@@ -201,6 +201,20 @@ class RecipesController < ApplicationController
     redirect_to recipes_path, notice:"削除しました"
   end
 
+  # レシピ画像の削除[テンプレート・カレンダー共通]
+  def image_destroy
+    case params[:target]
+      when 'recipe_image'
+        @recipe = Recipe.includes(:food_stuffs).find_by(id: params[:id], user_id: current_user.id)
+        @recipe.recipe_image.purge
+        render 'edit'
+      when 'recipe_template_image'
+        @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:id], user_id: current_user.id)
+        @recipeTemplate.recipe_template_image.purge
+        render 'regist_edit'
+    end
+  end
+
   private
 
   def recipe_param

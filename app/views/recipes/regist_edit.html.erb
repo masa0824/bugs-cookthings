@@ -3,7 +3,7 @@
   <div class="grid">
     <div class="card">
       <% if @recipeTemplate.recipe_template_image.persisted? %>
-        <%= image_tag @recipeTemplate.recipe_template_image, :class => 'recipe-image' %>
+        <%= cl_image_tag @recipeTemplate.recipe_template_image.key, :class => 'recipe-image'  %>
       <% else %>
         <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
       <% end %>
@@ -11,7 +11,10 @@
         <table id="recipe-table">
           <tr>
             <th>レシピ画像</th>
-            <td><%= r.file_field :recipe_template_image %></td>
+            <td>
+              <%= r.file_field :recipe_template_image %><br />
+              <%= link_to "画像削除", image_recipe_delete_path(@recipeTemplate, target: 'recipe_template_image'), method: :delete, data: {confirm: '削除しますか？'} %>
+            </td>
           </tr>
           <tr>
             <th>レシピ名</th>

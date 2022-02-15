@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="card">
       <% if @recipe.recipe_image.persisted? %>
-        <%= image_tag @recipe.recipe_image, :class => 'recipe-image' %>
+        <%= cl_image_tag @recipe.recipe_image.key, :class => 'recipe-image'  %>
       <% else %>
         <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
       <% end %>

@@ -2,12 +2,12 @@
 <div id="recipe-new">
   <div class="grid">
     <div class="card">
-      <div class="add"><%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %></div>
+      <div class="add"><%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %></div>
       <%= form_for @recipeTemplates, url: regist_new_recipe_path do |r| %>
         <table id="recipe-table">
           <tr>
             <th>レシピ画像</th>
-            <td><%= r.file_field :recipe_template_image %></td>
+            <td><%= r.file_field :recipe_template_image, :id => 'GAZOU' %></td>
           </tr>
           
           <tr>

@@ -3,9 +3,9 @@
   <div class="grid">
     <div class="card">
       <% if @recipe.recipe_image.persisted? %>
-        <%= cl_image_tag @recipe.recipe_image.key, :class => 'recipe-image'  %>
+        <%= cl_image_tag @recipe.recipe_image.key, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% else %>
-        <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
+        <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% end %>
       <%= form_for @recipe, url:recipe_path(@recipe) do |r| %>
         <table id="recipe-table">
@@ -26,7 +26,7 @@
           <tr>
             <th>レシピ画像</th>
             <td>
-              <%= r.file_field :recipe_image %><br />
+              <%= r.file_field :recipe_image, :id => 'GAZOU' %><br />
               <%= link_to "画像削除", image_recipe_delete_path(@recipe, target: 'recipe_image'), method: :delete, data: {confirm: '削除しますか？'} %>
             </td>
           </tr>

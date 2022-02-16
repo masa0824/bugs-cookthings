@@ -25,18 +25,23 @@ class UsersController < ApplicationController
   
   def edit
     @menu_page_title = 'ユーザー情報'
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: current_user.id)
 
     # 使用容量チェック
-    ret_cap = ActiveRecord::Base.connection.select_one('select check_upload_capacity(1);')
-    @capacity = ret_cap['check_upload_capacity']/1000
+    ret_cap = ActiveRecord::Base.connection.select_one("select check_upload_capacity(#{current_user.id});")
+    if ret_cap['check_upload_capacity']
+      user_total_capacity = ret_cap['check_upload_capacity']/1000
+    else
+      user_total_capacity = 0
+    end
+    @capacity = user_total_capacity
   end
 
   # ユーザーアカウント情報更新
   def update
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: current_user.id)
     # 更新対象
-    @user.id = session[:user_id]
+    @user.id = current_user.id
     #@user.email = user_params[:email]
     @user.last_name = user_params[:last_name]
     @user.first_name = user_params[:first_name]
@@ -51,13 +56,13 @@ class UsersController < ApplicationController
   end
   
   def edit_pw
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: current_user.id)
   end
 
   def update_edit_pw
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: current_user.id)
     # 更新対象
-    @user.id = session[:user_id]
+    @user.id = current_user.id
     @user.password = user_params[:password]
 
     if @user.save(context: :change_password)
@@ -122,12 +127,12 @@ class UsersController < ApplicationController
 
   # アカウント削除ページ
   def account_delete
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: current_user.id)
   end
 
   # アカウント削除
   def destroy
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: current_user.id)
     log_out
     @user.destroy
     redirect_to root_url

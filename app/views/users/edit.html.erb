@@ -20,10 +20,10 @@
         メールアドレス：<%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255, :disabled => 'disabled' %>
         氏名(姓)：<%= f.text_field :last_name, :placeholder => '氏名(姓)', :class => 'input-field', :maxlength => 255 %>
         氏名(名)：<%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
-
         <%= f.submit "変更", :class => 'btn create-btn' %>
         <%= link_to "パスワードを変更する", edit_pw_path, :class => 'link' %>
         <%= link_to "アカウントを削除する", account_delete_path, :class => 'link' %>
+        使用容量：<%= @capacity %> KB
       </div>
     <% end %>
   </div>

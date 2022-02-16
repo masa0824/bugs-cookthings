@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   def edit
     @menu_page_title = 'ユーザー情報'
     @user = User.find_by(id: session[:user_id])
+
+    # 使用容量チェック
+    ret_cap = ActiveRecord::Base.connection.select_one('select check_upload_capacity(1);')
+    @capacity = ret_cap['check_upload_capacity']/1000
   end
 
   # ユーザーアカウント情報更新

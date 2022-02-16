@@ -77,7 +77,7 @@ class RecipesController < ApplicationController
 
   # テンプレートレシピを使ってカレンダーレシピを登録
   def create2
-    @recipe = Recipe.new
+    @recipe = Recipe.new(recipe_param2)
     @recipeTemplate = RecipeTemplate.new(regist_recipe_param(false))
     # @recipeモデルに値を追加
     @recipe.recipe_name = @recipeTemplate.recipe_name
@@ -219,6 +219,22 @@ class RecipesController < ApplicationController
 
   def recipe_param
     params.require(:recipe).permit(
+        :cook_at, 
+        :recipe_name,
+        :category,
+        :recipe_image,
+        food_stuffs_attributes:[
+            :id,
+            :food_stuff,
+            :amount,
+            :mass,
+            :_destroy
+        ]
+    )
+  end
+
+  def recipe_param2
+    params.require(:recipe_template).permit(
         :cook_at, 
         :recipe_name,
         :category,

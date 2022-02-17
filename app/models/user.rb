@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_many :recipes, foreign_key: :user_id, dependent: :destroy
+    has_many :recipe_templates, foreign_key: :user_id, dependent: :destroy
     has_secure_password validations: false
 
     attr_accessor :activation_token, :reset_token
@@ -33,7 +34,7 @@ class User < ApplicationRecord
     validates :first_name,
         length: { maximum: MaxLength1 },
         on: :change_userinfo
-
+    
     # アカウント登録時のアクティベーション
     def create_activation_digest
         self.activation_token = User.new_token

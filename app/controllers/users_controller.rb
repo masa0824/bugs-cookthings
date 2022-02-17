@@ -26,14 +26,6 @@ class UsersController < ApplicationController
   def edit
     @menu_page_title = 'ユーザー情報'
     @user = User.find_by(id: current_user.id)
-
-    # 使用容量チェック
-    ret_cap = ActiveRecord::Base.connection.select_one("select check_upload_capacity(#{current_user.id});")
-    if ret_cap['check_upload_capacity']
-      user_total_capacity = ret_cap['check_upload_capacity']/1000
-    else
-      user_total_capacity = 0
-    end
     @capacity = user_total_capacity
   end
 
@@ -168,6 +160,26 @@ class UsersController < ApplicationController
     if @user.password_reset_expired?
       flash[:danger] = "パスワードのリセットの有効期限が切れました。"
       redirect_to reset_password_url
+    end
+  end
+
+  # ユーザーアカウントの使用容量
+  def user_total_capacity
+    ret_cap = ActiveRecord::Base.connection.select_one("select check_upload_capacity(#{current_user.id});")
+    total_cap = ret_cap['check_upload_capacity']
+    case total_cap
+      when nil
+        return '0バイト[未使用]'
+      when 0..(1024**1-1)
+        return (total_cap).to_s + 'B'
+      when 1024**1..(1024**2-1)
+        return (total_cap/1024**1.to_f).round(2).to_s + 'KB'
+      when 1024**2..(1024**3-1)
+        return (total_cap/1024**2.to_f).round(2).to_s + 'MB'
+      when 1024**3..nil
+        return (total_cap/1024**2.to_f).round(2).to_s + 'GB'
+      else
+        return '???'
     end
   end
 end

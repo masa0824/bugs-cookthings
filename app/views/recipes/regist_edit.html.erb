@@ -1,4 +1,20 @@
 <h1>登録レシピ編集画面</h1>
+
+<% if !@recipeTemplate.nil? %>
+<ul>
+<% @recipeTemplate.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+</ul>
+<% end %>
+
+<% if flash[:success] %>
+<%= flash.now[:success] %>
+<% end %>
+<% if flash.now[:danger] %>
+<%= flash.now[:danger] %>
+<% end %>
+
 <div id="recipe-edit">
   <div class="grid">
     <div class="card">

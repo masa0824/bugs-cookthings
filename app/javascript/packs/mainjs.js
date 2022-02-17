@@ -21,4 +21,14 @@ $(function(){
             alert("ブラウザがサムネ表示に対応していません(´；ω；｀)");
         }
     });
+
+    // アカウント画像の上限警告
+    $("#GAZOU").bind("change", function() {
+        var size_in_megabytes = this.files[0].size/1024/1024;
+        if (size_in_megabytes > 5) {
+          alert("ファイルは5MB以下にして下さい");
+          $("#micropost_image").val("");
+        }
+      });
+
 });

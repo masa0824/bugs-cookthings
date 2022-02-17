@@ -121,7 +121,8 @@ class RecipesController < ApplicationController
     if @recipe.update(recipe_param)
       redirect_to recipes_path, notice: "編集しました"
     else
-      render 'edit'
+      flash[:danger] = 'えらー'
+      redirect_to edit_recipe_path
     end
   end
 
@@ -190,7 +191,8 @@ class RecipesController < ApplicationController
     if @recipeTemplate.update(regist_recipe_param)
       redirect_to recipes_path, notice: "編集しました"
     else
-      render 'edit'
+      flash[:danger] = 'えらー'
+      redirect_to regist_edit_recipe_path
     end
   end
 

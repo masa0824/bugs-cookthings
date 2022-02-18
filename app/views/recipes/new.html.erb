@@ -19,7 +19,7 @@
   <div class="grid">
     <div class="card">
       <% if @recipe.recipe_image.persisted? %>
-        <%= cl_image_tag @recipe.recipe_image.key, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
+        <%= cl_image_tag @recipe.recipe_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% else %>
         <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% end %>

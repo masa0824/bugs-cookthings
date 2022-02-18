@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 gem 'image_processing'
+gem 'mini_magick'
 
 # Cloudinary & Active Storage
 gem 'cloudinary', require: true

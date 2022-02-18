@@ -11,7 +11,7 @@
     <% @recipeTemplates.each do |r| %>
       <div class="card">
           <% if r.recipe_template_image.persisted? %>
-            <%= cl_image_tag r.recipe_template_image.key, :class => 'recipe-image'  %>
+            <%= cl_image_tag r.recipe_template_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image'  %>
           <% else %>
             <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
           <% end %>

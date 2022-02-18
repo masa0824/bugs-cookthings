@@ -4,7 +4,7 @@
     <div class="card">
 <% if false %>
       <% if @recipeTemplate.recipe_template_image.persisted? %>
-        <%= cl_image_tag @recipeTemplate.recipe_template_image.key, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
+        <%= cl_image_tag @recipeTemplate.recipe_template_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% else %>
         <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% end %>

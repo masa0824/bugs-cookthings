@@ -38,6 +38,7 @@ class UsersController < ApplicationController
     @menu_page_title = 'ユーザー情報'
     @user = User.find_by(id: current_user.id)
     @capacity = user_total_capacity
+    @regist_recipe = user_regist_recipe
   end
 
   # ユーザーアカウント情報更新
@@ -192,5 +193,11 @@ class UsersController < ApplicationController
       else
         return '???'
     end
+  end
+
+  # ユーザーアカウントの登録レシピ数
+  def user_regist_recipe
+    ret = ActiveRecord::Base.connection.select_one("select check_regist_recipe(#{current_user.id});")
+    ret['check_regist_recipe'] == nil ? 0 : ret['check_regist_recipe']
   end
 end

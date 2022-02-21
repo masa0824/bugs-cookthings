@@ -15,7 +15,7 @@
 
 <div id="users">
   <div class="contents-wrapp">
-    <%= form_for(@user, url: edit_pw_path) do |f| %>
+    <%= form_for(@user, url: edit_pw_path, method: 'patch') do |f| %>
       <div class="input-form">
         <%= f.password_field :password, :placeholder => '新しいパスワード', :class => 'input-field', :maxlength => 255 %>
         <%= f.submit "変更", :class => 'btn create-btn' %>

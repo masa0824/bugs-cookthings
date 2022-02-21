@@ -1,6 +1,17 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, {only: [:edit, :update, :edit_pw]}
-  before_action :logged_in_user_deny, {only: [:new, :create, :reset_password, :reset_password_sendmail, :reset_password_edit, :reset_password_update]}
+  before_action :logged_in_user, {only: [ :edit, 
+                                          :update,
+                                          :edit_pw,
+                                          :update_edit_pw,
+                                          :account_delete,
+                                          :destroy]}
+  before_action :logged_in_user_deny, {only: [  :new,
+                                                :create,
+                                                :account_activation_edit,
+                                                :reset_password,
+                                                :reset_password_sendmail,
+                                                :reset_password_edit,
+                                                :reset_password_update]}
   before_action :get_user,   only: [:reset_password_edit, :reset_password_update]
   before_action :valid_user, only: [:reset_password_edit, :reset_password_update]
   before_action :check_expiration, only: [:reset_password_edit, :reset_password_update]

@@ -1,10 +1,10 @@
 $(function(){
     // アカウント削除確認
-    $(document).on("click", "#acount_delete", function(){
-        if(!confirm('本当に削除しますか？')){
-            return false;
-        }
-    });
+    //$(document).on("click", "#acount_delete", function(){
+    //    if(!confirm('本当に削除しますか？')){
+    //        return false;
+    //    }
+    //});
 
     // アップロード画像のプレビュー
     $(document).on("change", "#GAZOU", function(){

@@ -29,6 +29,5 @@ $(function(){
           alert("ファイルは5MB以下にして下さい");
           $("#micropost_image").val("");
         }
-      });
-
+    });
 });

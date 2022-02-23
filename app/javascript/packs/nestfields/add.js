@@ -12,7 +12,12 @@ class addFields {
         // Loop over each link on the page. A page could have multiple nested forms.
         this.links.forEach((link)=>{
             link.addEventListener('click', (e) => {
-                this.handleClick(link, e);
+                if(this.checkInputValue() === false){
+                    alert('項目を追加するには材料を入力して下さい');
+                    e.preventDefault();
+                }else{
+                    this.handleClick(link, e);
+                }
             });
         });
     }
@@ -37,6 +42,16 @@ class addFields {
         newFields ? food.insertAdjacentHTML('beforeend', newFields) : null ;
     }
 
+    // フォーム[材料]の入力値の空チェック
+    checkInputValue(){
+        let result = true;
+        $('#food-stuff-table').find('td').find('[name^="recipe"]').each(function(i, ele) {
+            if(ele.value === ''){
+                return result = false;
+            }
+        });
+        return result;
+    }
 }
 
 // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work 

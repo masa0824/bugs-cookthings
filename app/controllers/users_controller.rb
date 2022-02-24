@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def edit
     @menu_page_title = 'ユーザー情報'
     @user = User.find_by(id: current_user.id)
-    @capacity = user_total_capacity
+    @capacity = exchange_capacity_view(user_total_capacity)
     @regist_recipe = user_regist_recipe
   end
 
@@ -173,31 +173,5 @@ class UsersController < ApplicationController
       flash[:danger] = "パスワードのリセットの有効期限が切れました。"
       redirect_to reset_password_url
     end
-  end
-
-  # ユーザーアカウントの使用容量
-  def user_total_capacity
-    ret_cap = ActiveRecord::Base.connection.select_one("select check_upload_capacity(#{current_user.id});")
-    total_cap = ret_cap['check_upload_capacity']
-    case total_cap
-      when nil
-        return '0バイト[未使用]'
-      when 0..(1024**1-1)
-        return (total_cap).to_s + 'B'
-      when 1024**1..(1024**2-1)
-        return (total_cap/1024**1.to_f).round(2).to_s + 'KB'
-      when 1024**2..(1024**3-1)
-        return (total_cap/1024**2.to_f).round(2).to_s + 'MB'
-      when 1024**3..nil
-        return (total_cap/1024**2.to_f).round(2).to_s + 'GB'
-      else
-        return '???'
-    end
-  end
-
-  # ユーザーアカウントの登録レシピ数
-  def user_regist_recipe
-    ret = ActiveRecord::Base.connection.select_one("select check_regist_recipe(#{current_user.id});")
-    ret['check_regist_recipe'] == nil ? 0 : ret['check_regist_recipe']
   end
 end

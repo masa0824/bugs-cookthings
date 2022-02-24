@@ -25,13 +25,22 @@
       <% end %>
       <%= form_for @recipeTemplate, url:regist_edit_recipe_path(@recipeTemplate) do |r| %>
         <table id="recipe-table">
+
+
           <tr>
             <th>レシピ画像</th>
+            <% if @user_total_capacity < @user_limit_info['USER_LIMIT_CAPACITY']*1024*1024 %>
             <td>
               <%= r.file_field :recipe_template_image, :id => 'GAZOU' %><br />
               <%= link_to "画像削除", image_recipe_delete_path(@recipeTemplate, target: 'recipe_template_image'), method: :delete, data: {confirm: '削除しますか？'} %>
             </td>
+            <% else %>
+              <td>利用容量を超えてます。既存の画像を削除して下さい。</td>
+            <% end %>
           </tr>
+
+
+
           <tr>
             <th>レシピ名</th>
             <td><%= r.text_field :recipe_name %></td>

@@ -23,8 +23,8 @@
         <%= f.submit "変更", :class => 'btn create-btn' %>
         <%= link_to "パスワードを変更する", edit_pw_path, :class => 'link' %>
         <%= link_to "アカウントを削除する", account_delete_path, :class => 'link' %>
-        使用容量：<%= @capacity %><br />
-        登録数：<%= @regist_recipe %>レシピ
+        使用容量：<%= @capacity %> (利用上限：<%= ENV['USER_FREE_LIMIT_CAPACITY'].to_i %>MB)<br />
+        登録数：<%= @regist_recipe %>レシピ (利用上限：<%= ENV['USER_FREE_LIMIT_REGIST_RECIPE'].to_i %>レシピ)
       </div>
     <% end %>
   </div>

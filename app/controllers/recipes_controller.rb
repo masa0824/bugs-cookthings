@@ -22,6 +22,8 @@ class RecipesController < ApplicationController
 
   def new
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
+    @user_total_capacity = user_total_capacity
+    @user_limit_info = user_limit_info
     # テンプレートレシピを利用するかしないかで分岐
     if !params[:recipe_tpl_id]
       @recipe = Recipe.new
@@ -106,6 +108,8 @@ class RecipesController < ApplicationController
   def edit
     #@recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
     @recipe = Recipe.includes(:food_stuffs).find_by(id: params[:id], user_id: current_user.id)
+    @user_total_capacity = user_total_capacity
+    @user_limit_info = user_limit_info
   end
 
   def destroy
@@ -162,6 +166,8 @@ class RecipesController < ApplicationController
   def regist_new
     @recipeTemplates = RecipeTemplate.new
     @recipeTemplates.food_stuff_templates.build
+    @user_total_capacity = user_total_capacity
+    @user_limit_info = user_limit_info
     #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
   
@@ -183,6 +189,8 @@ class RecipesController < ApplicationController
   # テンプレートレシピ編集
   def regist_edit
     @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:id], user_id: current_user.id)
+    @user_total_capacity = user_total_capacity
+    @user_limit_info = user_limit_info
   end
 
   # テンプレートレシピ更新

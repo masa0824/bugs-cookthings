@@ -1,8 +1,8 @@
 
 <tr class="nested-fields">
   <%= f.hidden_field :_destroy %>
-  <td class="td1"><%= f.text_field :food_stuff, required: true %></td>
-  <td class="td2"><%= f.number_field :amount, required: true %></td>
-  <td class="td3"><%= f.text_field :mass, required: true %></td>
+  <td class="td1"><%= f.text_field :food_stuff, required: true, :placeholder => '食材' %></td>
+  <td class="td2"><%= f.number_field :amount, required: true, :placeholder => '数量' %></td>
+  <td class="td3"><%= f.text_field :mass, required: true, :placeholder => '単位' %></td>
   <td class="td4"><%= link_to "×", '', class: "remove_fields" %></td>
 </tr>    

@@ -66,7 +66,11 @@
           <% end %>
         </table>
         <div class="addBtn"><%= link_to_add_fields "追加", r, :food_stuffs %></div>
-        <%= r.submit "完了", :class => 'btn finish-btn'%>
+        <% if @regist_recipe <= @user_limit_info['USER_LIMIT_REGIST_RECIPE'] %>
+          <%= r.submit "変更", :class => 'btn finish-btn'%>
+        <% else %>
+          <td>登録数を超えてます。既存のレシピを削除して下さい。</td>
+        <% end %>
       <% end %>
     </div>
   </div>

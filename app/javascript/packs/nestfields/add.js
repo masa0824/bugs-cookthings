@@ -7,16 +7,22 @@ class addFields {
     }
 
     iterateLinks() {
+        const LimitAddMaterial = 15;
         // If there are no links on the page, stop the function from executing.
         if(this.links.length === 0) return;
         // Loop over each link on the page. A page could have multiple nested forms.
         this.links.forEach((link)=>{
             link.addEventListener('click', (e) => {
-                if(this.checkInputValue() === false){
-                    alert('項目を追加するには材料を入力して下さい');
-                    e.preventDefault();
+                if(this.checkInputNum() < LimitAddMaterial){
+                    if(this.checkInputValue() === false){
+                        alert('項目を追加するには材料を入力して下さい');
+                        e.preventDefault();
+                    }else{
+                        this.handleClick(link, e);
+                    }
                 }else{
-                    this.handleClick(link, e);
+                    alert('1レシピで追加できる材料は'+ LimitAddMaterial +'個までです');
+                    e.preventDefault();
                 }
             });
         });
@@ -51,6 +57,18 @@ class addFields {
             }
         });
         return result;
+    }
+
+    // フォーム[材料]の数チェック
+    checkInputNum(){
+        let none_cnt = 0;
+        let td_num = $('.td1').length;
+        $('.nested-fields').find('input[id$="__destroy"]').each(function(){
+            if($(this).val() === '1'){
+                none_cnt++;
+            }
+        });
+        return td_num - none_cnt;
     }
 }
 

@@ -16,7 +16,7 @@ return (
       left join recipes as r on u.id = r.user_id 
     WHERE u.id = $1
     
-    union 
+    union all 
     
     SELECT count(rt.id) as recipe_cnt 
     FROM users as u 

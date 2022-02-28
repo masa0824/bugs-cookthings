@@ -16,7 +16,7 @@ FROM (
     left join active_storage_blobs as asb on asa.blob_id = asb.id 
   WHERE u.id = $1 and asa.record_type = 'Recipe'
 
-  union 
+  union all 
 
   SELECT sum(asb.byte_size) as cap 
   FROM users as u 

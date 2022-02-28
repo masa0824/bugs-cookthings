@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   # ユーザーアカウントの使用容量
   def user_total_capacity
     ret_cap = ActiveRecord::Base.connection.select_one("select check_upload_capacity(#{current_user.id});")
-    return ret_cap['check_upload_capacity']
+    return ret_cap['check_upload_capacity'] == nil ? 0 : ret_cap['check_upload_capacity']
   end
 
   # 容量の単位変換

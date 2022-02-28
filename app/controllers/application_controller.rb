@@ -49,11 +49,15 @@ class ApplicationController < ActionController::Base
 
   # ユーザーアカウントの制限情報
   def user_limit_info
+    @user = User.find_by(id: current_user.id)
     ret = {}
-    ret['USER_LIMIT_CAPACITY'] = ENV['USER_FREE_LIMIT_CAPACITY'].to_i
-    ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_FREE_LIMIT_REGIST_RECIPE'].to_i
-    #ret['USER_LIMIT_CAPACITY'] = ENV['USER_PAID_LIMIT_CAPACITY'].to_i
-    #ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_PAID_LIMIT_REGIST_RECIPE'].to_i
+    if @user.acount_plan == 1
+      ret['USER_LIMIT_CAPACITY'] = ENV['USER_FREE_LIMIT_CAPACITY'].to_i
+      ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_FREE_LIMIT_REGIST_RECIPE'].to_i
+    elsif @user.acount_plan == 2
+      ret['USER_LIMIT_CAPACITY'] = ENV['USER_PAID_LIMIT_CAPACITY'].to_i
+      ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_PAID_LIMIT_REGIST_RECIPE'].to_i
+    end
     return ret
   end
 end

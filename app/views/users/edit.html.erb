@@ -13,6 +13,10 @@
 <%= flash.now[:danger] %>
 <% end %>
 
+
+aaaaa
+<%= @user_limit_info %>
+
 <div id="users">
   <div class="contents-wrapp">
     <%= form_for(@user, url: users_path) do |f| %>
@@ -23,8 +27,8 @@
         <%= f.submit "変更", :class => 'btn create-btn' %>
         <%= link_to "パスワードを変更する", edit_pw_path, :class => 'link' %>
         <%= link_to "アカウントを削除する", account_delete_path, :class => 'link' %>
-        使用容量：<%= @capacity %> (利用上限：<%= ENV['USER_FREE_LIMIT_CAPACITY'].to_i %>MB)<br />
-        登録数：<%= @regist_recipe %>レシピ (利用上限：<%= ENV['USER_FREE_LIMIT_REGIST_RECIPE'].to_i %>レシピ)
+        使用容量：<%= @capacity %> (利用上限：<%= @user_limit_info['USER_LIMIT_CAPACITY'] %>MB)<br />
+        登録数：<%= @regist_recipe %>レシピ (利用上限：<%= @user_limit_info['USER_LIMIT_REGIST_RECIPE'] %>レシピ)
       </div>
     <% end %>
   </div>

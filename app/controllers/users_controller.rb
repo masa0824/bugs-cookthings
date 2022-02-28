@@ -39,6 +39,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: current_user.id)
     @capacity = exchange_capacity_view(user_total_capacity)
     @regist_recipe = user_regist_recipe
+    @user_limit_info = user_limit_info
   end
 
   # ユーザーアカウント情報更新

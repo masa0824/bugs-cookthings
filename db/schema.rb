@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
   end
 
   create_table "food_stuff_templates", force: :cascade do |t|
+    t.string "food_kind", limit: 255
     t.string "food_stuff", limit: 255
     t.integer "amount"
     t.string "mass", limit: 255
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
   end
 
   create_table "food_stuffs", force: :cascade do |t|
+    t.string "food_kind", limit: 255
     t.string "food_stuff", limit: 255
     t.integer "amount"
     t.string "mass", limit: 255
@@ -69,6 +71,8 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
     t.datetime "cook_at"
     t.bigint "user_id"
     t.boolean "is_original", default: false, null: false
+    t.integer "select_image", default: 0, null: false, comment: "0 -> 未使用｜1以上 -> 指定画像"
+    t.string "kind", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_recipe_templates_on_user_id"
@@ -80,6 +84,8 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
     t.datetime "cook_at"
     t.bigint "user_id"
     t.boolean "is_original", default: false, null: false
+    t.integer "select_image", default: 0, null: false, comment: "0 -> 未使用｜1以上 -> 指定画像"
+    t.string "kind", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
@@ -95,6 +101,8 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer "acount_plan", limit: 2, default: 1, null: false, comment: "1 -> 無料プラン｜2 -> 有料プラン"
+    t.boolean "acount_lock", default: false, null: false, comment: "1 -> 無料プラン｜2 -> 有料プラン"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

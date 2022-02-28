@@ -13,6 +13,9 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :reset_digest
       t.datetime :reset_sent_at
 
+      t.integer :acount_plan, limit: 1, :default => 1, :null => false, comment: "1 -> 無料プラン｜2 -> 有料プラン"
+      t.boolean :acount_lock, :default => false, :null => false, comment: "1 -> 無料プラン｜2 -> 有料プラン"
+
       t.timestamps
     end
     add_index :users, [:email], unique: true

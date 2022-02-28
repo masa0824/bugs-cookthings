@@ -1,6 +1,7 @@
 class CreateFoodStuffTemplates < ActiveRecord::Migration[6.1]
   def change
     create_table :food_stuff_templates do |t|
+      t.string :food_kind, limit: 255
       t.string :food_stuff, limit: 255
       t.integer :amount, limit: 4
       t.string :mass, limit: 255

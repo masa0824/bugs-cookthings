@@ -19,9 +19,6 @@
           <%= link_to "編集", regist_edit_recipe_path(r.id), method: :get %>
           [コピー] 
           <%= link_to "削除", regist_delete_path(r.id), method: :delete, data: {confirm: '削除しますか？'} %>
-          <!--
-          <%= button_to r.recipe_name, copy_recipe_path(r, date_param: @cook_at), :class => 'link' %>
-          -->
       </div>
     <% end %>
   </div>

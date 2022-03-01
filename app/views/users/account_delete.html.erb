@@ -1,18 +1,5 @@
 <h1>アカウントを削除</h1>
 
-<ul>
-<% @user.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-<% end %>
-</ul>
-
-<% if flash[:success] %>
-<%= flash.now[:success] %>
-<% end %>
-<% if flash.now[:danger] %>
-<%= flash.now[:danger] %>
-<% end %>
-
 <div id="users">
   <div class="contents-wrapp">
     <div class="input-form">

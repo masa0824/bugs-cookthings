@@ -1,0 +1,41 @@
+<% flash.each do |message_type, message| %>
+  <div class="notifications">
+    <div class="notice"><%= message %></div>
+  </div>
+<% end %>
+
+<% if @recipe.respond_to?(:errors) %>
+  <% @recipe.errors.full_messages.each do |message| %>
+    <div class="notifications">
+      <div class="alert">
+        <ul>
+          <li><%= message %></li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @recipeTemplates.respond_to?(:errors) %>
+  <% @recipeTemplates.errors.full_messages.each do |message| %>
+    <div class="notifications">
+      <div class="alert">
+        <ul>
+          <li><%= message %></li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @user.respond_to?(:errors) %>
+  <% @user.errors.full_messages.each do |message| %>
+    <div class="notifications">
+        <div class="alert">
+          <ul>
+            <li><%= message %></li>
+          </ul>
+        </div>
+    </div>
+  <% end %>
+<% end %>

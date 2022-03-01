@@ -1,15 +1,5 @@
-<ul>
-<% @user.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-<% end %>
-</ul>
-
-
 <div id="users">
   <div class="contents-wrapp">
-    <% if flash.now[:danger] %>
-      <%= flash.now[:danger] %>
-    <% end %>
     <%= form_for(@user) do |f| %>
       <div class="input-form">
         <%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255 %>

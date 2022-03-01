@@ -12,7 +12,8 @@
   </head>
 
   <body>
-
+    <%= render 'layouts/err_msg' %>
+    
     <% case controller.controller_name %>
     <% when "recipes" %>
       <% case controller.action_name %>

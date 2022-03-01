@@ -1,13 +1,11 @@
 <h1>レシピ一覧</h1>
 <div id="catalog">
   <div class="grid">
-  
     <div class="card">
       <div class="add"><%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
       <%= link_to "レシピ新規追加", new_recipe_path(date_param: @cook_at), :class => 'link' %>
       </div>
     </div>
-
     <% @recipeTemplates.each do |r| %>
       <div class="card">
           <% if r.recipe_template_image.persisted? %>

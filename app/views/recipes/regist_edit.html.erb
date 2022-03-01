@@ -1,20 +1,5 @@
 <h1>登録レシピ編集画面</h1>
 
-<% if !@recipeTemplate.nil? %>
-<ul>
-<% @recipeTemplate.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-<% end %>
-</ul>
-<% end %>
-
-<% if flash[:success] %>
-<%= flash.now[:success] %>
-<% end %>
-<% if flash.now[:danger] %>
-<%= flash.now[:danger] %>
-<% end %>
-
 <div id="recipe-edit">
   <div class="grid">
     <div class="card">
@@ -25,8 +10,6 @@
       <% end %>
       <%= form_for @recipeTemplate, url:regist_edit_recipe_path(@recipeTemplate) do |r| %>
         <table id="recipe-table">
-
-
           <tr>
             <th>レシピ画像</th>
             <% if @user_total_capacity < @user_limit_info['USER_LIMIT_CAPACITY']*1024*1024 %>
@@ -38,8 +21,6 @@
               <td>利用容量を超えてます。既存の画像を削除して下さい。</td>
             <% end %>
           </tr>
-
-
 
           <tr>
             <th>レシピ名</th>

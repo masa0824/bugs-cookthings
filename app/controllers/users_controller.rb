@@ -22,14 +22,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      flash[:success] = '仮登録が完了しました。送られたメールにて本登録ください。'
+    if @user.save(context: :create_acount)
+      flash[:success] = '仮登録が完了しました。送られたメールにて本登録ください'
       # 本登録アクティベーション案内
       activation = User.find_by(email: @user.email)
       activation.create_activation_digest
       redirect_to root_url
     else
-      flash.now[:danger] = 'えらー'
+      #flash.now[:danger] = 'えらー'
       render :new
     end
   end
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       flash[:success] = '登録変更が完了しました'
       redirect_to edit_users_path
     else
-      flash.now[:danger] = 'えらー'
+      #flash.now[:danger] = 'えらー'
       render edit_users_path
     end
   end
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
       flash[:success] = '変更完了しました'
       redirect_to edit_pw_path
     else
-      flash.now[:danger] = 'えらー'
+      #flash.now[:danger] = 'えらー'
       render edit_pw_path
     end
   end
@@ -87,7 +87,7 @@ class UsersController < ApplicationController
       user.update_attribute(:activated,    true)
       user.update_attribute(:activated_at, Time.zone.now)
       #log_in user
-      flash[:success] = "Account activated!"
+      flash[:success] = "アカウントが有効になりました"
      #redirect_to user
     else
       flash[:danger] = "Invalid activation link"
@@ -124,7 +124,7 @@ class UsersController < ApplicationController
     if @user.save(context: :change_password)
       flash[:success] = '変更完了しました'
     else
-      flash[:danger] = 'えらー'
+      flash[:danger] = 'パスワードを入力して下さい'
       #render reset_password_edit_path(params[:token], email: @user.email)
       redirect_to reset_password_edit_url(params[:token], email: @user.email)
     end

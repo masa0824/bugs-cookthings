@@ -9,13 +9,27 @@ class User < ApplicationRecord
     MaxLength1 = 255
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+    # アカウント新規登録
     validates :email,
         presence: true,
         uniqueness: true,
         length: { maximum: MaxLength1 },
         format: { with: VALID_EMAIL_REGEX },
-        on: :change_userinfo
+        on: :create_acount
 
+    validates :password,
+        presence: true,
+        on: :create_acount
+
+    validates :last_name,
+        length: { maximum: MaxLength1 },
+        on: :create_acount
+
+    validates :first_name,
+        length: { maximum: MaxLength1 },
+        on: :create_acount
+
+    # パスワードリセット・再発行
     validates :email,
         presence: true,
         uniqueness: false,
@@ -23,10 +37,19 @@ class User < ApplicationRecord
         format: { with: VALID_EMAIL_REGEX },
         on: :reset_password
 
+    # パスワード変更
     validates :password,
         presence: true,
         on: :change_password
 
+    # ユーザー情報変更
+    validates :email,
+        presence: true,
+        uniqueness: true,
+        length: { maximum: MaxLength1 },
+        format: { with: VALID_EMAIL_REGEX },
+        on: :change_userinfo
+    
     validates :last_name,
         length: { maximum: MaxLength1 },
         on: :change_userinfo

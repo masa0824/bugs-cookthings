@@ -1,20 +1,5 @@
 <h1>カレンダー編集画面</h1>
 
-<% if !@recipe.nil? %>
-<ul>
-<% @recipe.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-<% end %>
-</ul>
-<% end %>
-
-<% if flash[:success] %>
-<%= flash.now[:success] %>
-<% end %>
-<% if flash.now[:danger] %>
-<%= flash.now[:danger] %>
-<% end %>
-
 <div id="recipe-edit">
   <div class="grid">
     <div class="card">

@@ -196,3 +196,18 @@ input[type="submit"]{
   z-index: -1;
 }
 /*** ＜背景画像:END＞ ***/
+
+/*** ＜メッセージ表示:START＞ ***/
+div.notifications{
+  color: white;
+  text-align: center;  
+
+  .notice {
+    background-color: lightBlue;
+  }
+
+  .alert {
+    background-color: orange;
+  }
+}
+/*** ＜メッセージ表示:END＞ ***/

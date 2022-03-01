@@ -4,31 +4,16 @@
     <title>BugsCookthings</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'mainjs', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 shrink-to-fit=no">
   </head>
-
   <body>
     <%= render 'layouts/err_msg' %>
-    
-    <% case controller.controller_name %>
-    <% when "recipes" %>
-      <% case controller.action_name %>
-      <% when "index" %>
-        <div id="recipe-bg_calendar_img"></div>
-      <% else %>
-        <div id="recipe-bg_recipe_img"></div>
-      <% end %>
-    <% when "sessions", "users" %>
-      <div id="user-bg_user_img"></div>
-    <% end %>
-
+    <%= render 'layouts/bg_img' %>
     <%= render 'layouts/header' %>
     <%= yield %>
-
     <%= javascript_pack_tag 'humberger', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # 共通Helper用
   include SessionsHelper
+  include ApplicationHelper
 
   private
   # ログイン済みユーザーかどうか確認
@@ -26,18 +27,18 @@ class ApplicationController < ActionController::Base
   # 容量の単位変換
   def exchange_capacity_view(total_cap)
     case total_cap
-    when nil
-      return '0バイト[未使用]'
-    when 0..(1024**1-1)
-      return (total_cap).to_s + 'B'
-    when 1024**1..(1024**2-1)
-      return (total_cap/1024**1.to_f).round(2).to_s + 'KB'
-    when 1024**2..(1024**3-1)
-      return (total_cap/1024**2.to_f).round(2).to_s + 'MB'
-    when 1024**3..nil
-      return (total_cap/1024**2.to_f).round(2).to_s + 'GB'
-    else
-      return '???'
+      when nil
+        return '0バイト[未使用]'
+      when 0..(1024**1-1)
+        return (total_cap).to_s + 'B'
+      when 1024**1..(1024**2-1)
+        return (total_cap/1024**1.to_f).round(2).to_s + 'KB'
+      when 1024**2..(1024**3-1)
+        return (total_cap/1024**2.to_f).round(2).to_s + 'MB'
+      when 1024**3..nil
+        return (total_cap/1024**2.to_f).round(2).to_s + 'GB'
+      else
+        return '???'
     end
   end
 
@@ -46,18 +47,28 @@ class ApplicationController < ActionController::Base
     ret = ActiveRecord::Base.connection.select_one("select check_regist_recipe(#{current_user.id});")
     ret['check_regist_recipe'] == nil ? 0 : ret['check_regist_recipe']
   end
-
+  
   # ユーザーアカウントの制限情報
   def user_limit_info
-    @user = User.find_by(id: current_user.id)
     ret = {}
-    if @user.acount_plan == 1
-      ret['USER_LIMIT_CAPACITY'] = ENV['USER_FREE_LIMIT_CAPACITY'].to_i
-      ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_FREE_LIMIT_REGIST_RECIPE'].to_i
-    elsif @user.acount_plan == 2
-      ret['USER_LIMIT_CAPACITY'] = ENV['USER_PAID_LIMIT_CAPACITY'].to_i
-      ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_PAID_LIMIT_REGIST_RECIPE'].to_i
+
+    # アカウントプラン毎の判定
+    case get_user_plan
+      # 管理者モード
+      when 0
+        ret['USER_LIMIT_CAPACITY'] = 99999
+        ret['USER_LIMIT_REGIST_RECIPE'] = 99999
+      # フリープラン
+      when 1
+        ret['USER_LIMIT_CAPACITY'] = ENV['USER_FREE_LIMIT_CAPACITY'].to_i
+        ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_FREE_LIMIT_REGIST_RECIPE'].to_i
+      # 有料プラン
+      when 2
+        ret['USER_LIMIT_CAPACITY'] = ENV['USER_PAID_LIMIT_CAPACITY'].to_i
+        ret['USER_LIMIT_REGIST_RECIPE'] = ENV['USER_PAID_LIMIT_REGIST_RECIPE'].to_i
+      else
     end
+
     return ret
   end
 end

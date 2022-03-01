@@ -15,4 +15,9 @@ module ApplicationHelper
     # This renders a simple link, but passes information into `data` attributes.
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  # ユーザープランチェック
+  def get_user_plan
+    get_user_plan = User.find_by(id: current_user.id).acount_plan
+  end
 end

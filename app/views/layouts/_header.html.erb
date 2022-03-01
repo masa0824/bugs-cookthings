@@ -12,6 +12,9 @@
             <i class="fa fa-bars" aria-hidden="true"></i>
           </button>
           <div class="menu">
+            <% if get_user_plan == 0 %>
+            管理者モード
+            <% end %>
             <div class="menu__item"><%= link_to "ユーザー情報", edit_users_path, class: 'header-button home-button' %></div>
             <div class="menu__item"><%= link_to "Log out", logout_path, method: :delete, class: 'header-button logout-button' %></div>
           </div>

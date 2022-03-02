@@ -30,4 +30,10 @@ $(function(){
           $("#micropost_image").val("");
         }
     });
+
+    // 利用規約を開く
+    $('#open_rule').on('click', function() {
+        window.open('/rule',"WindowName","width=700,height=512,resizable=no,scrollbars=yes");
+        return false;
+    });
 });

@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   # レシピ画像の削除[テンプレート・カレンダー共通]
   delete '/recipes/:id/edit', to: 'recipes#image_destroy', as: 'image_recipe_delete'
   resources :recipes
+  # 利用規約
+  get '/rule', to: 'sessions#rule'
 
   # テスト
   get '/user/test', to: 'users#test'

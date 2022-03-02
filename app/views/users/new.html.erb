@@ -7,9 +7,8 @@
         <p class="link-p">※氏名はアカウント作成後に登録可能です</p>
         <%= f.text_field :last_name, :placeholder => '氏名(姓)', :class => 'input-field', :maxlength => 255 %>
         <%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
-
+        <span><%= check_box_tag :check_rule, 0, checked=false, {required: true} %> <a id="open_rule">利用規約</a>に同意します</span>
         <%= f.submit "登録", :class => 'btn create-btn' %>
-
         <p class="link-p">アカウントをお持ちの方はこちらから</p>
         <%= link_to "ログイン", login_path, :class => 'link' %>
       </div>

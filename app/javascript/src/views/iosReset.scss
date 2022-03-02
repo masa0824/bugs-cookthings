@@ -3,10 +3,12 @@ button,
 textarea,
 select {
   /* デフォルトスタイルをリセット */
+  /*
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
+  */
+  
   /* font-familyを継承しないので、継承させる */
   font-family: inherit;
 

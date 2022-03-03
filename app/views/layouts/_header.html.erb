@@ -1,10 +1,17 @@
 <% if logged_in? %>
   <header class="header">
+    <h1 class="logo">
+      <a href="/">
+        <img class="logo_img" src="/img/logo.png" alt="ロゴの名前" style="width: 50%; height: 2%;">
+      </a>
+    </h1>
     <div class="header-inner">
+      <!--
       <%= link_to "Home", recipes_path, class: 'header-button home-button' %>
       <div class="logo">
         <div><%= @menu_page_title %></div>
       </div>
+      -->
       <nav class="header-nav">
         <div class="header-nav-item">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,5 +28,13 @@
         </div>
       </nav>
     </div>
+  </header>
+<% else %>
+  <header class="header">
+    <h1 class="logo">
+      <a href="/">
+        <img class="logo_img" src="/img/logo.png" alt="ロゴの名前" style="width: 50%; height: 2%;">
+      </a>
+    </h1>
   </header>
 <% end %>

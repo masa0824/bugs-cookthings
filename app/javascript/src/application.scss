@@ -38,6 +38,12 @@ input[type="submit"]{
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 2rem;
+  img.logo_img{
+    max-width: fit-content;
+  }
+  h1.logo{
+    text-align: center;
+  }
 }
 
 .header-inner {
@@ -45,7 +51,7 @@ input[type="submit"]{
   align-items: center;
   justify-content: space-between;
   max-width: 1024px;
-  height: 60px;
+  /*height: 60px;*/
   padding: 0 0.8em;
   margin: 0 auto;
   font-size: 1.2em;

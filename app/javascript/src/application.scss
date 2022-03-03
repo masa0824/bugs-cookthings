@@ -4,6 +4,7 @@
 @import './views/sessions.scss';
 @import './views/users.scss';
 @import './views/recipes.scss';
+@import './views/gg_coffee.scss';
 
 *{margin:0; padding:0;}
 
@@ -87,6 +88,24 @@ input[type="submit"]{
 .home-button {
   color: #2699FB;
   text-decoration: none;
+}
+
+/*** ＜ページタイトルの見出し＞ ***/
+div.page_name{
+  margin-inline: auto;
+  width: fit-content;
+  h2{
+    position: relative;
+    padding: 0.25em 0;
+    left: 25px;
+  }
+  h2:after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: -webkit-linear-gradient(to right, rgb(230, 90, 90), transparent);
+    background: linear-gradient(to right, rgb(230, 90, 90), transparent);
+  }
 }
 
 /*** ＜ハンバーガーメニュー:START＞ ***/

@@ -1,7 +1,9 @@
 <div id="day_catalog">
   <div class="grid">
     <div class="card">
-      <h2><%= l @cook_at, format: :default %></h2>
+      <div class="page_name">
+        <h2><%= l @cook_at, format: :default %></h2>
+      </div>
       <table>
         <% @recipes.each do |r| %>
           <tr>

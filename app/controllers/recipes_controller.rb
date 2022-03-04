@@ -22,9 +22,10 @@ class RecipesController < ApplicationController
 
   def new
     @cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
-    @user_total_capacity = user_total_capacity
-    @user_limit_info = user_limit_info
-    @regist_recipe = user_regist_recipe
+    #@user_total_capacity = user_total_capacity
+    #@user_limit_info = user_limit_info
+    #@regist_recipe = user_regist_recipe
+    get_user_info
     # テンプレートレシピを利用するかしないかで分岐
     if !params[:recipe_tpl_id]
       @recipe = Recipe.new
@@ -109,9 +110,10 @@ class RecipesController < ApplicationController
   def edit
     #@recipe = Recipe.includes(:food_stuffs).find(session[:user_id])
     @recipe = Recipe.includes(:food_stuffs).find_by(id: params[:id], user_id: current_user.id)
-    @user_total_capacity = user_total_capacity
-    @user_limit_info = user_limit_info
-    @regist_recipe = user_regist_recipe
+    #@user_total_capacity = user_total_capacity
+    #@user_limit_info = user_limit_info
+    #@regist_recipe = user_regist_recipe
+    get_user_info
   end
 
   def destroy
@@ -168,9 +170,10 @@ class RecipesController < ApplicationController
   def regist_new
     @recipeTemplates = RecipeTemplate.new
     @recipeTemplates.food_stuff_templates.build
-    @user_total_capacity = user_total_capacity
-    @user_limit_info = user_limit_info
-    @regist_recipe = user_regist_recipe
+    #@user_total_capacity = user_total_capacity
+    #@user_limit_info = user_limit_info
+    #@regist_recipe = user_regist_recipe
+    get_user_info
     #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
   end
   
@@ -192,9 +195,10 @@ class RecipesController < ApplicationController
   # テンプレートレシピ編集
   def regist_edit
     @recipeTemplate = RecipeTemplate.includes(:food_stuff_templates).find_by(id: params[:id], user_id: current_user.id)
-    @user_total_capacity = user_total_capacity
-    @user_limit_info = user_limit_info
-    @regist_recipe = user_regist_recipe
+    #@user_total_capacity = user_total_capacity
+    #@user_limit_info = user_limit_info
+    #@regist_recipe = user_regist_recipe
+    get_user_info
   end
 
   # テンプレートレシピ更新
@@ -217,6 +221,11 @@ class RecipesController < ApplicationController
 
   # レシピ画像の削除[テンプレート・カレンダー共通]
   def image_destroy
+    #@user_total_capacity = user_total_capacity
+    #@user_limit_info = user_limit_info
+    #@regist_recipe = user_regist_recipe
+    get_user_info
+
     case params[:target]
       when 'recipe_image'
         @recipe = Recipe.includes(:food_stuffs).find_by(id: params[:id], user_id: current_user.id)
@@ -231,12 +240,19 @@ class RecipesController < ApplicationController
 
   private
 
+  def get_user_info
+    @user_total_capacity = user_total_capacity
+    @user_limit_info = user_limit_info
+    @regist_recipe = user_regist_recipe
+  end
+
   def recipe_param
     params.require(:recipe).permit(
         :cook_at, 
         :recipe_name,
         :category,
         :recipe_image,
+        :select_image,
         food_stuffs_attributes:[
             :id,
             :food_stuff,
@@ -253,6 +269,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_image,
+        :select_image,
         food_stuffs_attributes:[
             :id,
             :food_stuff,
@@ -270,6 +287,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_template_image,
+        :select_image,
         food_stuff_templates_attributes:[
             :id,
             :food_stuff,
@@ -284,6 +302,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_template_image,
+        :select_image,
         food_stuff_templates_attributes:[
             #:id,
             :food_stuff,

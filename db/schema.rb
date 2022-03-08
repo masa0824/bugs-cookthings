@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_075508) do
+ActiveRecord::Schema.define(version: 2022_03_08_023803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,8 @@ ActiveRecord::Schema.define(version: 2022_03_07_075508) do
 
   create_table "select_images", force: :cascade do |t|
     t.integer "sort_num"
-    t.string "name", limit: 255
+    t.string "food_name", limit: 255
+    t.string "file_name", limit: 255
   end
 
   create_table "users", force: :cascade do |t|

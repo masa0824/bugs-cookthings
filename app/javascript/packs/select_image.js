@@ -21,14 +21,9 @@ $(function(){
   // フォーム送信処理
   $('form').submit(function(){
     let radioval = $('input[name="check[img]"]:radio').val();
-
     if(radioval == '2'){
       $('#select_images_id').val(0);
     }
-
-    alert('aaaaa');
-    //$('#select_images_id').val(999);
-    //return false;
   });
 
   // レシピ画像の選択処理[親]

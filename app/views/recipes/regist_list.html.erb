@@ -3,20 +3,14 @@
 </div>
 <div id="catalog">
   <div class="grid">
-  
     <div class="card">
       <div class="add"><%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
         <%= link_to "レシピ新規追加", regist_new_recipe_path, :class => 'link' %>
       </div>
     </div>
-    
     <% @recipeTemplates.each do |r| %>
       <div class="card">
-          <% if r.recipe_template_image.persisted? %>
-            <%= cl_image_tag r.recipe_template_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image'  %>
-          <% else %>
-            <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
-          <% end %>
+          <%= show_recipe_image(r) %>
           <%= r.recipe_name %>
           <%= link_to "編集", regist_edit_recipe_path(r.id), method: :get %>
           [コピー] 

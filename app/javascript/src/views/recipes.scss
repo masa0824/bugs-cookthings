@@ -130,6 +130,20 @@
         object-fit: cover;
         background: #f1f1f1;
       }
+      .imgBtn {
+        border: 3px solid;
+        display: inline-block;
+        padding: 2px 1em;
+        position: relative;
+      }
+      .imgBtn input[type="file"] {
+          height: 100%;
+          left: 0;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+      }
     }
     table{
       background:#e3f2fd;
@@ -185,6 +199,20 @@
         /*height: 100%;*/
         object-fit: cover;
         background: #f1f1f1;
+      }
+      .imgBtn {
+          border: 3px solid;
+          display: inline-block;
+          padding: 2px 1em;
+          position: relative;
+      }
+      .imgBtn input[type="file"] {
+          height: 100%;
+          left: 0;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
       }
     }
     table{

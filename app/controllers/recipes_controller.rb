@@ -238,6 +238,11 @@ class RecipesController < ApplicationController
     end
   end
 
+  # レシピ画像選択
+  def img_select
+    @selectImages = SelectImage.where.not(id: 0)
+  end
+  
   private
 
   def get_user_info
@@ -252,7 +257,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_image,
-        :select_image,
+        :select_images_id,
         food_stuffs_attributes:[
             :id,
             :food_stuff,
@@ -269,7 +274,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_image,
-        :select_image,
+        :select_images_id,
         food_stuffs_attributes:[
             :id,
             :food_stuff,
@@ -287,7 +292,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_template_image,
-        :select_image,
+        :select_images_id,
         food_stuff_templates_attributes:[
             :id,
             :food_stuff,
@@ -302,7 +307,7 @@ class RecipesController < ApplicationController
         :recipe_name,
         :category,
         :recipe_template_image,
-        :select_image,
+        :select_images_id,
         food_stuff_templates_attributes:[
             #:id,
             :food_stuff,

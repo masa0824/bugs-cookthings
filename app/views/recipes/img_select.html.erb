@@ -1,0 +1,16 @@
+<div class="radio">
+  <table>
+  <% @selectImages.each do |si| %>
+    <tr>
+      <td>
+        <label><input type="radio" name="hold" value="<%= si.id %>" checked><%= si.food_name %></label>
+      </td>
+      <td>
+        <%= image_tag get_select_image_filepath(si.id), :class => 'recipe-image', :width => '120px' %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  <button id="image_set" class="btn btn-default">選択</button>
+</div>
+<%= javascript_pack_tag 'select_image', 'data-turbolinks-track': 'reload' %>

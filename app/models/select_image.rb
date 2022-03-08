@@ -1,0 +1,2 @@
+class SelectImage < ApplicationRecord
+end

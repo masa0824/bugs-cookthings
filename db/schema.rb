@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_21_083631) do
+ActiveRecord::Schema.define(version: 2022_03_07_075508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,10 +71,11 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
     t.datetime "cook_at"
     t.bigint "user_id"
     t.boolean "is_original", default: false, null: false
-    t.integer "select_image", default: 0, null: false, comment: "0 -> 未使用｜1以上 -> 指定画像"
     t.string "kind", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "select_images_id", default: 0, null: false, comment: "0 -> 未使用｜1以上 -> 指定画像"
+    t.index ["select_images_id"], name: "index_recipe_templates_on_select_images_id"
     t.index ["user_id"], name: "index_recipe_templates_on_user_id"
   end
 
@@ -84,11 +85,17 @@ ActiveRecord::Schema.define(version: 2022_02_21_083631) do
     t.datetime "cook_at"
     t.bigint "user_id"
     t.boolean "is_original", default: false, null: false
-    t.integer "select_image", default: 0, null: false, comment: "0 -> 未使用｜1以上 -> 指定画像"
     t.string "kind", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "select_images_id", default: 0, null: false, comment: "0 -> 未使用｜1以上 -> 指定画像"
+    t.index ["select_images_id"], name: "index_recipes_on_select_images_id"
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "select_images", force: :cascade do |t|
+    t.integer "sort_num"
+    t.string "name", limit: 255
   end
 
   create_table "users", force: :cascade do |t|

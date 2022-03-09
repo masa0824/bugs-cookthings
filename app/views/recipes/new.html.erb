@@ -7,7 +7,7 @@
       <% if @recipe.recipe_image.persisted? %>
         <%= cl_image_tag @recipe.recipe_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% else %>
-        <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %>
+        <%= image_tag '/img/recipe_new_add.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %>
       <% end %>
       <%= form_for @recipe do |r| %>
         <table id="recipe-table">

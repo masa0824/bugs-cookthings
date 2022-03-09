@@ -7,13 +7,13 @@ module RecipesHelper
 
     # レシピ画像の表示
     def show_recipe_image(r_model)
-        r_model.nil? ? (return image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU') :
+        r_model.nil? ? (return image_tag '/img/recipe_new_add.png', :class => 'recipe-image', :id => 'DISP_GAZOU') :
         if r_model.select_images_id  == 0
             val_name = (r_model.respond_to? :recipe_template_image) ? 'template_' : ''
             if r_model.send("recipe_#{val_name}image").persisted?
                 return cl_image_tag r_model.send("recipe_#{val_name}image").key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image', :id => 'DISP_GAZOU'
             else
-                return image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU'
+                return image_tag '/img/recipe_new_add.png', :class => 'recipe-image', :id => 'DISP_GAZOU'
             end
         else
             return image_tag self.get_select_image_filepath(r_model.select_images_id), :class => 'recipe-image', :id => 'DISP_GAZOU'

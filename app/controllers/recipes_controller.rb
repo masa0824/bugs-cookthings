@@ -205,6 +205,8 @@ class RecipesController < ApplicationController
   def regist_update
     @recipeTemplate = RecipeTemplate.find_by(id: params[:id], user_id: current_user.id)
     if @recipeTemplate.update(regist_recipe_param)
+      # 「選択用レシピ画像」が選択されたら「アップロードレシピ画像」を削除する
+      @recipeTemplate.select_images_id != 0 ? @recipeTemplate.recipe_template_image.purge : false
       redirect_to recipes_path, notice: "編集しました"
     else
       flash[:danger] = 'えらー'

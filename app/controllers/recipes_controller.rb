@@ -89,6 +89,8 @@ class RecipesController < ApplicationController
     @recipe.cook_at = @recipeTemplate.cook_at
     @recipe.user_id = current_user.id
     @recipe.is_original = true
+    @recipe.kind = @recipeTemplate.kind
+    @recipe.select_images_id = @recipeTemplate.select_images_id
     @recipeTemplate.food_stuff_templates.each do | fst |
       @recipe.food_stuffs.build(
         food_stuff: fst.food_stuff,

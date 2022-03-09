@@ -53,15 +53,4 @@
 </div>
 <%= javascript_pack_tag 'regist_recipe', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'select_image', 'data-turbolinks-track': 'reload' %>
-<script>
-  //セレクトボックスの値を変更する関数
-  //これを子から呼ぶ
-  let target;
-  var setSelect = function(_id){
-    $(target).val(_id);
-    //console.log(_id);
-    //$('#test').text(_id);
-    //alert('_id:' + _id);
-    $('#select_images_id').val(_id);
-  }
-</script>
+<%= js_get_value_by_childwindow.html_safe %>

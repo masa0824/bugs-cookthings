@@ -4,11 +4,7 @@
 <div id="recipe-edit">
   <div class="grid">
     <div class="card">
-      <% if @recipe.recipe_image.persisted? %>
-        <%= cl_image_tag @recipe.recipe_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image', :id => 'DISP_GAZOU' %>
-      <% else %>
-        <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image', :id => 'DISP_GAZOU' %>
-      <% end %>
+      <%= show_recipe_image(@recipe) %>
       <%= form_for @recipe, url:recipe_path(@recipe) do |r| %>
         <table id="recipe-table">
           <tr>
@@ -27,10 +23,23 @@
           <tr>
             <th>レシピ画像</th>
             <% if @user_total_capacity < @user_limit_info['USER_LIMIT_CAPACITY']*1024*1024 %>
-              <td>
-                <%= r.file_field :recipe_image, :id => 'GAZOU' %><br />
-                <%= link_to "画像削除", image_recipe_delete_path(@recipe, target: 'recipe_image'), method: :delete, data: {confirm: '削除しますか？'} %>
-              </td>
+            <td>
+              <label><%= radio_button :check, 'img', 1, :value => 'A', checked: true %> 画像選択 </label>
+              <label><%= radio_button :check, 'img', 2, :value => 'B' %> 画像アップロード </label>
+              <br />
+              <span id="recipe_img_select">
+                <div class="imgBtn">
+                  画像選択
+                </div>
+                <%= r.hidden_field :select_images_id, :id => 'select_images_id', :value => 0 %>
+              </span>
+              <span id="recipe_img_upload" style="display: none;">
+                <div class="imgBtn">
+                  <%= r.file_field :recipe_image, :id => 'GAZOU' %>画像アップロード<br />
+                </div>
+                <%= link_to "画像削除", image_recipe_delete_path(@recipe, target: 'recipe_template_image'), method: :delete, data: {confirm: '削除しますか？'} %>
+              </span>
+            </td>
             <% else %>
               <td>利用容量を超えてます。既存の画像を削除して下さい。</td>
             <% end %>
@@ -61,3 +70,6 @@
     </div>
   </div>
 </div>
+<%= javascript_pack_tag 'regist_recipe', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'select_image', 'data-turbolinks-track': 'reload' %>
+<%= js_get_value_by_childwindow.html_safe %>

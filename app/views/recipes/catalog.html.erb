@@ -10,15 +10,8 @@
     </div>
     <% @recipeTemplates.each do |r| %>
       <div class="card">
-          <% if r.recipe_template_image.persisted? %>
-            <%= cl_image_tag r.recipe_template_image.key, :quality=>"auto", :fetch_format=>:auto, :class => 'recipe-image'  %>
-          <% else %>
-            <%= image_tag 'sample_xd_new_add_recipe.png', :class => 'recipe-image' %>
-          <% end %>
-          【登録レシピ】<%= r.recipe_name %> <%= link_to "[追加]", new_recipe_path(date_param: @cook_at, recipe_tpl_id: r.id), :class => 'link' %>
-          <!--
-          <%= button_to r.recipe_name, copy_recipe_path(r, date_param: @cook_at), :class => 'link' %>
-          -->
+        <%= show_recipe_image(r) %>
+        【登録レシピ】<%= r.recipe_name %> <%= link_to "[追加]", new_recipe_path(date_param: @cook_at, recipe_tpl_id: r.id), :class => 'link' %>
       </div>
     <% end %>
   </div>

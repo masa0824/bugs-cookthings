@@ -1,3 +1,9 @@
+class EmailExistValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+        record.errors.add(attribute, 'が存在していません') if !User.exists?(email: record.email)
+    end
+end
+
 class User < ApplicationRecord
     has_many :recipes, foreign_key: :user_id, dependent: :destroy
     has_many :recipe_templates, foreign_key: :user_id, dependent: :destroy
@@ -36,6 +42,7 @@ class User < ApplicationRecord
     validates :email,
         presence: true,
         uniqueness: false,
+        email_exist: true,
         length: { maximum: MaxLength1 },
         format: { with: VALID_EMAIL_REGEX },
         on: :reset_password

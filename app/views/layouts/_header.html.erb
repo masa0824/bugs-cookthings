@@ -1,40 +1,34 @@
-<% if logged_in? %>
-  <header class="header">
-    <h1 class="logo">
-      <a href="/">
-        <img class="logo_img" src="/img/logo.png" alt="ロゴの名前" style="width: 50%; height: 2%;">
-      </a>
-    </h1>
-    <div class="header-inner">
-      <!--
-      <%= link_to "Home", recipes_path, class: 'header-button home-button' %>
-      <div class="logo">
-        <div><%= @menu_page_title %></div>
-      </div>
-      -->
-      <nav class="header-nav">
-        <div class="header-nav-item">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-          <button type="button" class="menu-btn">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-          </button>
-          <div class="menu">
-            <% if get_user_plan == 0 %>
-            管理者モード
-            <% end %>
-            <div class="menu__item"><%= link_to "ユーザー情報", edit_users_path, class: 'header-button home-button' %></div>
-            <div class="menu__item"><%= link_to "Log out", logout_path, method: :delete, class: 'header-button logout-button' %></div>
-          </div>
+<header class="header">
+<% if @header_show != false %>
+  <h1 class="logo">
+  <a href="/">
+    <img class="logo_img" src="/img/logo.png" alt="ロゴの名前" style="width: 50%; height: 2%;">
+  </a>
+  </h1>
+  <% if logged_in? %>
+      <div class="header-inner">
+        <!--
+        <%= link_to "Home", recipes_path, class: 'header-button home-button' %>
+        <div class="logo">
+          <div><%= @menu_page_title %></div>
         </div>
-      </nav>
-    </div>
-  </header>
-<% else %>
-  <header class="header">
-    <h1 class="logo">
-      <a href="/">
-        <img class="logo_img" src="/img/logo.png" alt="ロゴの名前" style="width: 50%; height: 2%;">
-      </a>
-    </h1>
-  </header>
+        -->
+        <nav class="header-nav">
+          <div class="header-nav-item">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <button type="button" class="menu-btn">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <div class="menu">
+              <% if get_user_plan == 0 %>
+              管理者モード
+              <% end %>
+              <div class="menu__item"><%= link_to "ユーザー情報", edit_users_path, class: 'header-button home-button' %></div>
+              <div class="menu__item"><%= link_to "Log out", logout_path, method: :delete, class: 'header-button logout-button' %></div>
+            </div>
+          </div>
+        </nav>
+      </div>
+  <% end %>
 <% end %>
+</header>

@@ -245,6 +245,7 @@ class RecipesController < ApplicationController
   # レシピ画像選択
   def img_select
     @selectImages = SelectImage.where.not(id: 0)
+    @header_show = false
   end
   
   private

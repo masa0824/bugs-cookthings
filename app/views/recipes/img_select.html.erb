@@ -3,7 +3,7 @@
   <% @selectImages.each do |si| %>
     <tr>
       <td>
-        <label><input type="radio" name="hold" value="<%= si.id %>" checked><%= si.food_name %></label>
+        <label><%= radio_button '', 'hold', si.id %><%= si.food_name %></label>
       </td>
       <td>
         <%= image_tag get_select_image_filepath(si.id), :class => 'recipe-image', :width => '120px' %>

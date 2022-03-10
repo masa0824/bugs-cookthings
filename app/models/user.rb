@@ -6,7 +6,9 @@ class User < ApplicationRecord
     attr_accessor :activation_token, :reset_token
 
     #バリデーションの定義
+    MiniLength1 = 8
     MaxLength1 = 255
+    MaxLength2 = 16
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
     # アカウント新規登録
@@ -19,6 +21,7 @@ class User < ApplicationRecord
 
     validates :password,
         presence: true,
+        length: { minimum: MiniLength1, maximum: MaxLength2, message: 'は8文字以上16文字以下で入力して下さい。' },
         on: :create_acount
 
     validates :last_name,
@@ -40,6 +43,7 @@ class User < ApplicationRecord
     # パスワード変更
     validates :password,
         presence: true,
+        length: { minimum: MiniLength1, maximum: MaxLength2, message: 'は8文字以上16文字以下で入力して下さい。' },
         on: :change_password
 
     # ユーザー情報変更

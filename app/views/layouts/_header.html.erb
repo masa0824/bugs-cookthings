@@ -6,6 +6,7 @@
   </a>
   </h1>
   <% if logged_in? %>
+      <%= render 'layouts/notification/notification' %>
       <div class="header-inner">
         <!--
         <%= link_to "Home", recipes_path, class: 'header-button home-button' %>

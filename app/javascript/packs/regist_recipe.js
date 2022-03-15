@@ -1,5 +1,6 @@
 $(function(){
     // レシピ登録の数量を半角数字のみ
+    /** アイフォンで連続キー入力される疑いがあるため一旦除外
     $(document).on('click change keyup input', '[type="number"]', function(e){
         let value = $(e.currentTarget).val();
         value = value
@@ -9,4 +10,5 @@ $(function(){
             .replace(/[^0-9]/g, '');
         $(e.currentTarget).val(value);
     });
+    **/
 });

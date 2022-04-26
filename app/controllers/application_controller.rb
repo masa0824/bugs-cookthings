@@ -28,17 +28,17 @@ class ApplicationController < ActionController::Base
   def exchange_capacity_view(total_cap)
     case total_cap
       when nil
-        return '0バイト[未使用]'
+        return {num: 0, unit: 'バイト[未使用]'}
       when 0..(1024**1-1)
-        return (total_cap).to_s + 'B'
+        return {num: (total_cap).to_s, unit: 'B'}
       when 1024**1..(1024**2-1)
-        return (total_cap/1024**1.to_f).round(2).to_s + 'KB'
+        return {num: (total_cap/1024**1.to_f).round(2).to_s, unit: 'KB'}
       when 1024**2..(1024**3-1)
-        return (total_cap/1024**2.to_f).round(2).to_s + 'MB'
+        return {num: (total_cap/1024**2.to_f).round(2).to_s, unit: 'MB'}
       when 1024**3..nil
-        return (total_cap/1024**2.to_f).round(2).to_s + 'GB'
+        return {num: (total_cap/1024**2.to_f).round(2).to_s, unit: 'GB'}
       else
-        return '???'
+        return {num: '???', unit: '???'}
     end
   end
 

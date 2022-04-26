@@ -112,18 +112,27 @@ div.page_name{
 /*----------------------------
 * メニュー開閉ボタン
 *----------------------------*/
-.menu-btn{
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #4678ef;
-  color: #fff;
+div.header-nav-item{
+  .menu-btn{
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4678ef;
+    color: #fff;
+  }
+  .pos1{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  .pos2{
+    position: fixed;
+    top: 60px;
+    right: 10px;
+  }
 }
 
 /*----------------------------

@@ -8,11 +8,11 @@
         メールアドレス：<%= f.email_field :email, :placeholder => 'メールアドレス', :class => 'input-field', :maxlength => 255, :disabled => 'disabled' %>
         氏名(姓)：<%= f.text_field :last_name, :placeholder => '氏名(姓)', :class => 'input-field', :maxlength => 255 %>
         氏名(名)：<%= f.text_field :first_name, :placeholder => '氏名(名)', :class => 'input-field', :maxlength => 255 %>
-        <%= f.submit "変更", :class => 'btn create-btn' %>
-        <%= link_to "パスワードを変更する", edit_pw_path, :class => 'link' %>
-        <%= link_to "アカウントを削除する", account_delete_path, :class => 'link' %>
-        使用容量：<%= @capacity %> (利用上限：<%= @user_limit_info['USER_LIMIT_CAPACITY'] %>MB)<br />
-        登録数：<%= @regist_recipe %>レシピ (利用上限：<%= @user_limit_info['USER_LIMIT_REGIST_RECIPE'] %>レシピ)
+        <%= f.submit "変更", :class => 'btn create-btn', :'data-title' => 'ユーザーの変更', :'data-intro' => 'ユーザー情報を入力して「変更」を押すと更新できます。', :'data-step' => 'B1' %>
+        <%= link_to "パスワードを変更する", edit_pw_path, :class => 'link', :'data-title' => 'パスワード変更', :'data-intro' => 'パスワード変更画面に移動します', :'data-step' => 'B2' %>
+        <%= link_to "アカウントを削除する", account_delete_path, :class => 'link', :'data-title' => 'アカウント削除', :'data-intro' => 'アカウント削除画面に移動します', :'data-step' => 'B3' %>
+        <p data-title="使用容量上限" data-intro="現在の使用容量が表示されており、アカウント上限まで使用できます。" data-step="B4">使用容量：<strong><%= @capacity[:num] %></strong><%= @capacity[:unit] %> (利用上限：<strong><%= @user_limit_info['USER_LIMIT_CAPACITY'] %></strong>MB)</p>
+        <p data-title="レシピ登録上限" data-intro="現在のレシピ登録数が表示されており、アカウント上限まで使用できます。" data-step="B5">登録数：<strong><%= @regist_recipe %></strong>レシピ (利用上限：<strong><%= @user_limit_info['USER_LIMIT_REGIST_RECIPE'] %></strong>レシピ)</p>
       </div>
     <% end %>
   </div>

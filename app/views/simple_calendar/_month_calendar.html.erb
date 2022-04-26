@@ -7,11 +7,10 @@
     <%= link_to t('simple_calendar.next', default: '>'), calendar.url_for_next_view %>
   </div>
   <div class="search-btn-area">
-    <%= link_to "検索", recipes_search_path, :class => 'btn search-btn' %>
-    <%= link_to "登録", regist_list_recipe_path, :class => 'btn search-btn' %>
+    <%= link_to "検索", recipes_search_path, :class => 'btn search-btn', :'data-title' => 'カレンダーレシピ検索', :'data-intro' => '登録したカレンダーレシピの検索ができます', :'data-step' => 'A2' %>
+    <%= link_to "登録", regist_list_recipe_path, :class => 'btn search-btn', :'data-title' => 'テンプレートレシピ登録', :'data-intro' => '雛形となるレシピの登録ができます', :'data-step' => 'A3' %>
   </div>
-  
-  <table class="table table-striped calendar-table">
+  <table class="table table-striped calendar-table" data-title="カレンダーレシピ" data-intro="カレンダーをクリックする事で、日付毎にレシピ登録ができます" data-step="A1">
     <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>

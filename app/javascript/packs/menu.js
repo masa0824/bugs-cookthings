@@ -1,22 +1,26 @@
 $(function(){
     $('#menu-btn_humberger').on('click', function(){
       $('.menu').toggleClass('is-active');
+      $('#menu-btn_help').toggleClass('is-active');
     });
 
     //
     // ヘルプボタン機能
     //
     $('#menu-btn_help').on('click', function() {
-      //introJs().start();
-      introJs().setOptions({
-        'showProgress': true,
-        'hidePrev': true,
-        //'hideNext': true,
-        'showStepNumbers': true,
-        'prevLabel': '戻る',
-        'nextLabel': '次へ',
-        'doneLabel': '閉じる',
-      }).start();
+      //let menu_status = $('#humberger_menu').attr('class');
+      //if(menu_status !== 'menu is-active'){
+        //introJs().start();
+        introJs().setOptions({
+          'showProgress': true,
+          'hidePrev': true,
+          //'hideNext': true,
+          'showStepNumbers': true,
+          'prevLabel': '戻る',
+          'nextLabel': '次へ',
+          'doneLabel': '閉じる',
+        }).start();
+      //}
     });
 
     // ヘルプの表示順を指定

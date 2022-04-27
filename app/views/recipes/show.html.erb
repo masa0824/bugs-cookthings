@@ -5,8 +5,8 @@
       <%= @recipe.recipe_name %><br/>
       <%= l @recipe.cook_at, format: :yyyymmdd %><br/>
     
-      <%= link_to '編集',edit_recipe_path(@recipe) %>
-      <%= link_to "削除", recipe_path(@recipe), method: :delete, data: {confirm: '削除しますか？'} %>
+      <%= link_to '編集', edit_recipe_path(@recipe), :'data-title' => 'レシピ編集', :'data-intro' => 'レシピの内容を編集できます', :'data-step' => 'I1' %>
+      <%= link_to "削除", recipe_path(@recipe), method: :delete, data: {confirm: '削除しますか？'}, :'data-title' => 'レシピ削除', :'data-intro' => 'レシピを削除します', :'data-step' => 'I2' %>
 
       <br/>
       <table>

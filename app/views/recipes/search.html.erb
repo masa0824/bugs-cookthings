@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="card">
       <%= form_tag recipes_search_path do %>
-          <div class="dateArea">
+          <div class="dateArea" data-title="カレンダーレシピ検索" data-intro="検索したい日付をセットして「検索」ボタン押すと指定した日付のレシピが表示されます" data-step="C1">
             <%= date_field_tag :from_date, params[:from_date], :class => 'input-date' %>
             <span>~</span>
             <%= date_field_tag :to_date, params[:to_date], :class => 'input-date' %>
@@ -27,7 +27,7 @@
               <% end %>
             </table>
           </div>
-          <%= submit_tag "材料出力", :class => 'btn output-btn' %>
+          <%= submit_tag "材料出力", :class => 'btn output-btn', :'data-title' => '材料出力', :'data-intro' => '検索して出てきたレシピに必要な材料を一覧で表示します', :'data-step' => 'C2' %>
         <% end %>
       <% end %>
   </div>

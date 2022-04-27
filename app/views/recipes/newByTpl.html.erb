@@ -9,7 +9,7 @@
         <table id="recipe-table">
           <tr>
             <th>調理日</th>
-            <td>
+            <td data-title="調理日" data-intro="調理したい日付を入力します" data-step="H1">
               <%= raw sprintf(
                 r.date_select(
                   :cook_at,
@@ -23,7 +23,7 @@
           <tr>
             <th>レシピ画像</th>
             <% if @user_total_capacity < @user_limit_info['USER_LIMIT_CAPACITY']*1024*1024 %>
-            <td>
+            <td data-title="レシピ画像" data-intro="レシピ画像を、アプリで用意された画像か、自分で画像をアップロード(10MB以下)するか選択できます" data-step="H2">
               <label><%= radio_button :check, 'img', 1, :value => 'A', checked: true %> 画像選択 </label>
               <label><%= radio_button :check, 'img', 2, :value => 'B' %> 画像アップロード </label>
               <br />
@@ -45,20 +45,20 @@
           </tr>
           <tr>
             <th>レシピ名</th>
-            <td><%= r.text_field :recipe_name %></td>
+            <td data-title="レシピ名" data-intro="レシピの名前を入力します" data-step="H3"><%= r.text_field :recipe_name %></td>
           </tr>
           <tr>
             <th>カテゴリ</th>
-            <td><%= r.text_field :category %></td>
+            <td data-title="カテゴリ" data-intro="「昼食」などカテゴリを入力します" data-step="H4"><%= r.text_field :category %></td>
           </tr>          
         </table>
         ------------材料------------
-        <table id="food-stuff-table">
+        <table id="food-stuff-table" data-title="材料" data-intro="レシピに必要な材料を入力します" data-step="H5">
           <%= r.fields_for :food_stuff_templates do |food|%>
             <%= render "food_stuff_template_fields", f: food %>
           <% end %>
         </table>
-        <div class="addBtn"><%= link_to_add_fields "追加", r, :food_stuff_templates %></div>
+        <div class="addBtn" data-title="材料追加" data-intro="材料を入力する項目を追加します" data-step="H6"><%= link_to_add_fields "追加", r, :food_stuff_templates %></div>
         <% if @regist_recipe <= @user_limit_info['USER_LIMIT_REGIST_RECIPE'] %>
           <%= r.submit "完了", :class => 'btn finish-btn'%>
         <% else %>

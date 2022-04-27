@@ -5,11 +5,11 @@
   <div class="grid">
     <div class="card">
       <div class="add"><%= image_tag '/img/recipe_new_add.png', :class => 'recipe-image' %>
-      <%= link_to "レシピ新規追加", new_recipe_path(date_param: @cook_at), :class => 'link' %>
+      <%= link_to "レシピ新規追加", new_recipe_path(date_param: @cook_at), :class => 'link', :'data-title' => 'カレンダーレシピ追加', :'data-intro' => 'クリックするとレシピ追加画面が表示されます(※テンプレートレシピを登録してあると、以下にそれらレシピが表示されます)', :'data-step' => 'G1' %>
       </div>
     </div>
     <% @recipeTemplates.each do |r| %>
-      <div class="card">
+      <div class="card"  data-title="テンプレートレシピ" data-intro="テンプレートのレシピを利用してレシピ追加できます" data-step="G2">
         <%= show_recipe_image(r) %>
         【登録レシピ】<%= r.recipe_name %> <%= link_to "[追加]", new_recipe_path(date_param: @cook_at, recipe_tpl_id: r.id), :class => 'link' %>
       </div>

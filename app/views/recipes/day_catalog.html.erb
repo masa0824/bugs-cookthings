@@ -13,7 +13,7 @@
         <% end %>
         <tr>
           <th>新規追加</th>
-          <td><%= link_to "+", catalog_recipe_path(date_param: @cook_at), :class => 'link block' %></td>
+          <td data-title="レシピ追加" data-intro="クリックすると、レシピ追加画面が表示されます" data-step="F1"><%= link_to "+", catalog_recipe_path(date_param: @cook_at), :class => 'link block' %></td>
         </tr>
       </table>
     </div>

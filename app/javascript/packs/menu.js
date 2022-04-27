@@ -1,3 +1,7 @@
+replace_data_step = (source, replace) => {
+  $('[data-step="'+source+'"]').attr('data-step', replace);
+}
+
 $(function(){
     $('#menu-btn_humberger').on('click', function(){
       $('.menu').toggleClass('is-active');
@@ -24,24 +28,78 @@ $(function(){
     });
 
     // ヘルプの表示順を指定
-    switch (location.pathname) {
+    let pathname = location.pathname;
+    //console.log(pathname);
+    switch (true){
       // トップページ
-      case '/recipes':
-        $('[data-step="A1"]').attr('data-step', '1');
-        $('[data-step="A2"]').attr('data-step', '2');
-        $('[data-step="A3"]').attr('data-step', '3');
-        $('[data-step="A4"]').attr('data-step', '4');
-        $('[data-step="A5"]').attr('data-step', '5');
-        $('[data-step="A6"]').attr('data-step', '6');
+      case /\/recipes$/.test(pathname):
+        replace_data_step('A1', 1);
+        replace_data_step('A2', 2);
+        replace_data_step('A3', 3);
+        replace_data_step('A4', 4);
+        replace_data_step('A5', 5);
+        replace_data_step('A6', 6);
+        
         break;
       // ユーザーページ
-      case '/users/edit':
-        $('[data-step="B1"]').attr('data-step', '1');
-        $('[data-step="B2"]').attr('data-step', '2');
-        $('[data-step="B3"]').attr('data-step', '3');
-        $('[data-step="B4"]').attr('data-step', '4');
-        $('[data-step="B5"]').attr('data-step', '5');
+      case /\/users\/edit$/.test(pathname):
+        replace_data_step('B1', 1);
+        replace_data_step('B2', 2);
+        replace_data_step('B3', 3);
+        replace_data_step('B4', 4);
+        replace_data_step('B5', 5);
         break;
+      // 検索ページ
+      case /\/recipes\/search$/.test(pathname):
+        replace_data_step('C1', 1);
+        replace_data_step('C2', 2);
+        break;
+      // テンプレートレシピ ページ
+      case /\/recipes\/regist_list$/.test(pathname):
+        replace_data_step('D1', 1);
+        break;
+      // テンプレートレシピ 新規追加ページ
+      case /\/recipes\/regist_new$/.test(pathname):
+        replace_data_step('E1', 1);
+        replace_data_step('E2', 2);
+        replace_data_step('E3', 3);
+        replace_data_step('E4', 4);
+        replace_data_step('E5', 5);
+        break;
+      // カレンダーレシピ ページ
+      case /\/recipes\/day_catalog\/[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(pathname):
+        replace_data_step('F1', 1);
+        break;
+      // カレンダーレシピ レシピ一覧ページ
+      case /\/recipes\/catalog\/[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(pathname):
+        replace_data_step('G1', 1);
+        replace_data_step('G2', 2);
+        break;
+      // カレンダーレシピ 新規追加ページ
+      case /\/recipes\/new$/.test(pathname):
+        replace_data_step('H1', 1);
+        replace_data_step('H2', 2);
+        replace_data_step('H3', 3);
+        replace_data_step('H4', 4);
+        replace_data_step('H5', 5);
+        replace_data_step('H6', 6);
+        break;
+      // カレンダーレシピ 新規追加ページ
+      case /\/recipes\/[0-9]+$/.test(pathname):
+        replace_data_step('I1', 1);
+        replace_data_step('I2', 2);
+        break;
+      // カレンダーレシピ レシピ編集ページ
+      case /\/recipes\/[0-9]+\/edit$/.test(pathname):
+        replace_data_step('J1', 1);
+        replace_data_step('J2', 2);
+        replace_data_step('J3', 3);
+        replace_data_step('J4', 4);
+        replace_data_step('J5', 5);
+        replace_data_step('J6', 6);
+        break;
+      // デフォルト
       default:
+        break;
     }
 }());

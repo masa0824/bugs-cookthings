@@ -81,8 +81,9 @@ $(function(){
         replace_data_step('H2', 2);
         replace_data_step('H3', 3);
         replace_data_step('H4', 4);
-        replace_data_step('H5', 5);
-        replace_data_step('H6', 6);
+        replace_data_step('H7', 5);
+        replace_data_step('H5', 6);
+        replace_data_step('H6', 7);
         break;
       // カレンダーレシピ 新規追加ページ
       case /\/recipes\/[0-9]+$/.test(pathname):

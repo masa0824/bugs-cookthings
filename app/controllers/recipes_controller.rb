@@ -68,8 +68,13 @@ class RecipesController < ApplicationController
     @recipe = Recipe.create(recipe_param)
     @recipe.is_original = true
     @recipe.user_id = current_user.id
-
+    
     if @recipe.save
+      # カレンダーレシピからテンプレートレシピへコピー
+      if params[:check_tpl_regist] == '1'
+        copy_to_template_recipeTemplate(@recipe)
+      end
+      
       flash[:success] = "登録しました"
       @recipes = Recipe.all.where(user_id: current_user.id)
       redirect_to recipes_path
@@ -322,5 +327,24 @@ class RecipesController < ApplicationController
         ]
       )
     end
+  end
+
+  # カレンダーレシピからテンプレートレシピへコピー
+  def copy_to_template_recipeTemplate(recipe)
+    @recipeTemplate = RecipeTemplate.new
+    @recipeTemplate.recipe_name = recipe.recipe_name
+    @recipeTemplate.category = recipe.category
+    @recipeTemplate.user_id = recipe.user_id
+    #@recipeTemplate.is_original = recipe.is_original
+    @recipeTemplate.kind = recipe.kind
+    @recipeTemplate.select_images_id = recipe.select_images_id
+    recipe.food_stuffs.each do | fst |
+      @recipeTemplate.food_stuff_templates.build(
+        food_stuff: fst.food_stuff,
+        amount: fst.amount,
+        mass: fst.mass,
+      )
+    end
+    @recipeTemplate.save
   end
 end

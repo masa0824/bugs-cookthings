@@ -55,6 +55,10 @@
             <th>カテゴリ</th>
             <td data-title="カテゴリ" data-intro="「昼食」などカテゴリを入力します" data-step="H4"><%= r.text_field :category %></td>
           </tr>
+          <tr>
+            <th>テンプレート登録</th>
+            <td data-title="テンプレートレシピ登録" data-intro="登録するカレンダーレシピを同時にテンプレートレシピにも登録します" data-step="H7"><%= check_box_tag :check_tpl_regist, 1, checked=true %></td>
+          </tr>
         </table>
           ------------材料------------
         <table id="food-stuff-table" data-title="材料" data-intro="レシピに必要な材料を入力します" data-step="H5">

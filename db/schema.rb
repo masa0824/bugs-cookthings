@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_08_023803) do
+ActiveRecord::Schema.define(version: 2022_05_16_022854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2022_03_08_023803) do
     t.boolean "acount_lock", default: false, null: false, comment: "1 -> 無料プラン｜2 -> 有料プラン"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "check_latest_news", default: false, null: false, comment: "true -> チェック済み｜false -> 未チェック"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

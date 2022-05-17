@@ -27,6 +27,13 @@ $(function(){
       //}
     });
 
+    //
+    // ニュースチェックの新着をオフにする
+    //
+    $('#open_button').on('click', function() {
+      $('#notification-badge').remove();
+    });
+
     // ヘルプの表示順を指定
     let pathname = location.pathname;
     //console.log(pathname);

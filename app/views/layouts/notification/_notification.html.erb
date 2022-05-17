@@ -12,11 +12,11 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 -->
 
-<label class="open_button">
+<label class="open_button" id="open_button">
   <a class="trig-colorbox_iframe notification" href="/news">
     <i class="fas fa-bell fa-fw" data-intro="運営からのお知らせを確認できます" data-step="A5"></i>
     <% if check_latest_news === true %>
-    <span class="notification-badge"></span>
+    <span class="notification-badge" id="notification-badge"></span>
     <% end %>
   </a>
 </label>

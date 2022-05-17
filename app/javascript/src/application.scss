@@ -340,13 +340,13 @@ div.notifications{
   font-size: 2rem;
 }
 
-/*
+
 .notification-badge {
   position: absolute;
   top: 0.5rem;
-  left: 2.2rem;
-  width: 20px;
-  height: 20px;
+  left: 2.7rem;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background-color: #E93F33;
   color: white;
@@ -358,7 +358,7 @@ div.notifications{
 .notification.active {
   background-color: #ccc;
 }
-*/
+
 
 .notification.active span {
   opacity: 0;
@@ -367,3 +367,68 @@ div.notifications{
 }
 
 /*** ＜お知らせのモーダルウィンドウ:END＞ ***/
+
+/*** ＜お知らせ一覧:START＞ ***/
+div.news{
+  /*width: fit-content;*/
+  ul{
+    width: 50%;
+    margin: auto;
+    overflow: hidden;
+    li{
+      border-bottom:1px dotted #000;
+      list-style:none;
+      padding:10px;
+      width:800px;
+    }
+    a{
+      color:#000;
+      text-decoration:none;
+    }
+    span{
+      background-color:#2388b8;
+      border-radius:3px;
+      color:#fff;
+      display:inline-block;
+      margin-right:20px;
+      padding:5px;
+    }
+    time{
+      display: inline-block;
+      font-weight: bold;
+      margin-right:40px;
+    }
+    p{
+      color:#1c448d;
+      display: inline-block;
+      text-decoration:underline;
+    }
+    .new::after{
+      content:"NEW";
+      color: #d10606;
+      font-size: 1.1rem;
+      border: 1px solid #d10606;
+      padding: 4px 8px;
+      margin: 0 0 0 20px;
+      display: inline-block;
+      line-height: 1;
+    }
+  }
+  nav.pagination{
+    position: relative;
+    padding: 1.25em 0;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    /* top: 60%; */
+    left: 50%;
+    /* bottom: 10%; */
+    transform: translateY(0%) translateX(-50%);
+  }
+  span{
+    padding: 7px;
+  }
+}
+/*** ＜お知らせ一覧:END＞ ***/
+
+@import './application_mobile';

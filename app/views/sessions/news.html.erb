@@ -1,0 +1,25 @@
+
+<div class="page_name">
+<h2>お知らせ</h2><i class="gg-coffee"></i>
+</div>
+
+<%# 参考：https://codepen.io/kei_01011/pen/PravQg %>
+<div class="news">
+  <ul>
+    <li>
+        <span>記事ナンバー</span>
+        <time datetime="">[ 日付 ]</time>
+        <p>タイトル</p>
+    </li>
+    <% news_list.each do |news| %>
+    <li>
+      <a href="#">
+        <span><%= news.id %></td></span>
+        <time datetime="<%= news.news_date.strftime('%Y/%m/%d') %>"><%= news.news_date.strftime('%Y/%m/%d') %></time>
+        <p><%= news.title %></p>
+      </a>
+    </li>
+    <% end %>
+  </ul>
+  <%= paginate news_list %>
+</div>

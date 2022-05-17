@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   resources :recipes
   # 利用規約
   get '/rule', to: 'sessions#rule'
+  # お知らせ[news]
+  get '/news', to: 'sessions#news'
 
   # テスト
   get '/user/test', to: 'users#test'

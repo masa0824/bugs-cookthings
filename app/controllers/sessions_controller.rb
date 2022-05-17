@@ -26,6 +26,10 @@ class SessionsController < ApplicationController
   def rule
   end
 
+  def news
+    @header_show = false
+  end
+
   private
 
   # ログインチェック

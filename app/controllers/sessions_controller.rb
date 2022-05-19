@@ -36,6 +36,13 @@ class SessionsController < ApplicationController
     @header_show = false
   end
 
+  def news_article
+    @news = News.find(params[:id])
+
+    # ヘッダー非表示
+    @header_show = false
+  end
+
   private
 
   # ログインチェック

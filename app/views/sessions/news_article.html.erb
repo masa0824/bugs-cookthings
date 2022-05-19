@@ -1,0 +1,13 @@
+<div class="page_name">
+<h2><%= @news.title %></h2><i class="gg-coffee"></i>
+</div>
+
+<%# ※参考：https://maipyon.net/box-design/ %>
+<div class="news_box">
+    <div class="loose-leaf">
+        <p><%= @news.article %></p>
+    </div>
+    <div class="footer_link">
+        <p><%= link_to '戻る', news_url  %></p>
+    </div>
+</div>

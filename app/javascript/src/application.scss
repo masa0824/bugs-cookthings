@@ -431,4 +431,32 @@ div.news{
 }
 /*** ＜お知らせ一覧:END＞ ***/
 
+/*** ＜記事:START＞ ***/
+div.news_box{
+  position: absolute;
+  width: 50%;
+  left: 50%;
+  transform: translateY(0%) translateX(-50%);
+
+  div.loose-leaf{
+    background: #f8f0d7;
+    border-left: 5px dotted rgba(0,0,0,.1);
+    box-shadow: 0 0 0 5 #f8f0d7;
+    padding: 1em;
+    margin: 1em 5px;
+
+  }
+
+  div.loose-leaf p{
+    margin: 0;
+    padding: 0;
+  }
+
+  div.footer_link{
+    position: absolute;
+    left: 50%;
+  }
+}
+/*** ＜記事:END＞ ***/
+
 @import './application_mobile';

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get '/rule', to: 'sessions#rule'
   # お知らせ[news]
   get '/news', to: 'sessions#news'
+  get '/news/:id', to: 'sessions#news_article', as: 'article'
 
   # テスト
   get '/user/test', to: 'users#test'

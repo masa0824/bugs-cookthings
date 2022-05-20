@@ -2,6 +2,25 @@
   <%= f.hidden_field :_destroy %>
   <td class="td1"><%= f.text_field :food_stuff, required: true, :placeholder => '食材' %></td>
   <td class="td2"><%= f.number_field :amount, required: true, :placeholder => '数量' %></td>
-  <td class="td3"><%= f.text_field :mass, required: true, :placeholder => '単位' %></td>
+
+  <% material_unit_type = 0 %>
+
+  <% @csv_data_material_unit['単位'].each do |m|%>
+    <% if m === f.object.mass %>
+      <% material_unit_type = 1 %>
+      <% break %>
+    <% end %>
+  <% end %>
+
+  <% if f.object.mass.nil? %>
+    <% material_unit_type = 1 %>
+  <% end %>
+
+  <% if material_unit_type === 1 %>
+    <td class="td3"><%= f.select  :mass,  @csv_data_material_unit['単位'], { prompt: "カテゴリを選んでください" }, required: true, :placeholder => '単位' %></td> 
+  <% else %>
+    <td class="td3"><%= f.text_field :mass, required: true, :placeholder => '単位' %></td>
+  <% end %>
+
   <td class="td4"><%= link_to "×", '', class: "remove_fields" %></td>
 </tr>    

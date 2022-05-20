@@ -26,6 +26,10 @@ class RecipesController < ApplicationController
     #@user_limit_info = user_limit_info
     #@regist_recipe = user_regist_recipe
     get_user_info
+
+    # 材料の単位
+    @csv_data_material_unit = CSV.read('./public/csv/materialUnit.csv', headers: true)
+
     # テンプレートレシピを利用するかしないかで分岐
     if !params[:recipe_tpl_id]
       @recipe = Recipe.new
@@ -121,6 +125,9 @@ class RecipesController < ApplicationController
     #@user_limit_info = user_limit_info
     #@regist_recipe = user_regist_recipe
     get_user_info
+
+    # 材料の単位
+    @csv_data_material_unit = CSV.read('./public/csv/materialUnit.csv', headers: true)
   end
 
   def destroy
@@ -182,6 +189,9 @@ class RecipesController < ApplicationController
     #@regist_recipe = user_regist_recipe
     get_user_info
     #@cook_at = params[:date_param].present? ? params[:date_param].to_date : Date.today
+
+    # 材料の単位
+    @csv_data_material_unit = CSV.read('./public/csv/materialUnit.csv', headers: true)
   end
   
   # テンプレートレシピ新規登録
@@ -206,6 +216,9 @@ class RecipesController < ApplicationController
     #@user_limit_info = user_limit_info
     #@regist_recipe = user_regist_recipe
     get_user_info
+
+    # 材料の単位
+    @csv_data_material_unit = CSV.read('./public/csv/materialUnit.csv', headers: true)
   end
 
   # テンプレートレシピ更新

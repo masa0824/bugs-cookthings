@@ -49,7 +49,7 @@
           </tr>
           <tr>
             <th>レシピ名</th>
-            <td data-title="レシピ名" data-intro="レシピの名前を入力します" data-step="H3"><%= r.text_field :recipe_name %></td>
+            <td data-title="レシピ名" required="true" data-intro="レシピの名前を入力します" data-step="H3"><%= r.text_field :recipe_name, required: true  %></td>
           </tr>
           <tr>
             <th>カテゴリ</th>

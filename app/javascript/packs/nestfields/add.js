@@ -46,6 +46,11 @@ class addFields {
         //newFields ? link.insertAdjacentHTML('beforebegin', newFields) : null ;
         let food = document.querySelector('#food-stuff-table')
         newFields ? food.insertAdjacentHTML('beforeend', newFields) : null ;
+
+        // 追加された要素・単位にイベントを付与
+        document.querySelector('#recipe_template_food_stuff_templates_attributes_'+time+'_mass').addEventListener('change', function (e) {
+            chenge_massunit_type($(this));
+        });
     }
 
     // フォーム[材料]の入力値の空チェック

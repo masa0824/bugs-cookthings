@@ -17,7 +17,7 @@
   <% end %>
 
   <% if material_unit_type === 1 %>
-    <td class="td3"><%= f.select  :mass,  @csv_data_material_unit['単位'], { prompt: "カテゴリを選んでください" }, required: true, :placeholder => '単位' %></td> 
+    <td class="td3"><%= f.select  :mass,  @csv_data_material_unit['単位'], { prompt: "単位選択" }, required: true, :placeholder => '単位' %></td> 
   <% else %>
     <td class="td3"><%= f.text_field :mass, required: true, :placeholder => '単位' %></td>
   <% end %>

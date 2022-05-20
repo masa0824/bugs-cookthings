@@ -1,3 +1,5 @@
+require 'csv'
+
 class RecipesController < ApplicationController
   before_action :logged_in_user
 
@@ -29,7 +31,7 @@ class RecipesController < ApplicationController
 
     # 材料の単位
     @csv_data_material_unit = CSV.read('./public/csv/materialUnit.csv', headers: true)
-
+    
     # テンプレートレシピを利用するかしないかで分岐
     if !params[:recipe_tpl_id]
       @recipe = Recipe.new

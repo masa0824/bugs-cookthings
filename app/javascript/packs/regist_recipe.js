@@ -19,7 +19,7 @@ $(function(){
 
     // 材料[単位]のプルダウン処理[入力タイプ変更]
     chenge_massunit_type = (_this) => {
-        console.log(_this);
+        //console.log(_this);
         if(_this.val() === '＜直接入力＞'){
             let tag_name = $(_this).attr('name');
             let tag_id = $(_this).attr('id');

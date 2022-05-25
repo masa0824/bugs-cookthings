@@ -29,8 +29,8 @@ class SessionsController < ApplicationController
   def news
     # ニュースチェックフラグをオフにする
     #   ※ UPDATE "public"."users" SET "check_latest_news" = 't' WHERE 1=1;
-    User.find(current_user.id)
-    User.update(check_latest_news: false)
+    user = User.find(current_user.id)
+    user.update(check_latest_news: false)
 
     # ヘッダー非表示
     @header_show = false

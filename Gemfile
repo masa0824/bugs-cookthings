@@ -83,3 +83,6 @@ gem "net-imap", require: false
 
 # ページネーション導入
 gem 'kaminari'
+
+# Service Worker
+gem 'serviceworker-rails'
